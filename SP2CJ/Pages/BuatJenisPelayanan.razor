@@ -1,0 +1,90 @@
+﻿@page "/JenisPelayanan"
+@using SP2CJ.Data
+@using SP2CJ.Services
+@using System; 
+@using System.Collections.Generic; 
+@using Microsoft.AspNetCore.Components
+@using Models
+@using Twilio; 
+@using Twilio.Rest.Api.V2010.Account; 
+@using Twilio.Types; 
+<h1>Buat Jenis Pelayanan</h1>
+
+<div class="block">
+    <div class="block is-flex">
+        <EditForm Model="@refMasterItem" OnValidSubmit="@insertItem">
+            <DataAnnotationsValidator/>
+            <Blazorise.ValidationSummary/>
+            <div class="block container control border-5 border-primary">
+                <div class="control">
+                    <label class="is-flex is-justify-content-space-between">
+                        Jenis Pelayanan:
+                    </label>
+                    <InputText @attributes="InputAttributes" @bind-Value="refMasterItem.itemName"/>
+                </div>
+                <div class="control">
+                    <label class="is-flex is-justify-content-space-between">
+                        Jenis-Jenis Pelayanan:
+                    </label>
+                    <InputText @attributes="InputAttributes" @bind-Value="refMasterItem.itemCode"/>
+                </div>
+            <div class="block"></div>
+                <div class="is-flex block is-justify-content-space-between">
+                    <div></div>
+                    <button class="is-success button" type="submit">Tambah</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+    <div class="block">
+        <h2>To be Saved Roles:</h2>
+        <div class="block table-info border-top">
+            <TableTemplate Items="refPelayan.ItemList">
+                <TableHeader>
+                    <th>Kode</th>
+                    <th>Jenis Pelayanan</th>
+                    <th>Delete</th>
+                </TableHeader>
+                <RowTemplate Context="item">
+                    <td>@item.itemCode</td>
+                    <td>@item.itemName</td>
+                    <td><button @onclick="@(a => delete(item))" class="is-danger button">delete</button></td>
+                </RowTemplate>
+            </TableTemplate>    
+        </div>
+    </div>
+</div>
+
+@code {
+    CrudMongo cm = new CrudMongo();
+    RefMasterItem refMasterItem = new RefMasterItem();
+
+    RefMaster refPelayan = new RefMaster();
+
+    Dictionary<string, object> InputAttributes { get; set; } =
+        new()
+        {
+            {"class", "input"}
+        };
+
+    protected override void OnInitialized()
+    {
+        refPelayan = cm.GetRefMaster("PLYAN");
+    }
+    void insertItem()
+    {
+        refPelayan.ItemList.Add(refMasterItem);
+        cm.EditRefMasterItem(refPelayan);
+        refMasterItem = new RefMasterItem();
+    }
+
+    void delete(RefMasterItem refMasterItem)
+    {
+        refPelayan.ItemList.Remove(refMasterItem);
+        cm.EditRefMasterItem(refPelayan);
+        refPelayan = cm.GetRefMaster("PLYAN");
+    }
+
+    
+
+}

@@ -1,0 +1,159 @@
+﻿@using SP2CJ.Data
+@using System.Runtime.InteropServices
+@using Microsoft.AspNetCore.Components
+@using Models
+@using SP2CJ.Services
+@inject IJSRuntime JsRuntime
+
+@page "/InsertRole"
+
+<div class="block ">
+    <h1 class="title">Insert Role Pelayan</h1>
+    <div class="block align-content is-flex is-vcentered">
+        <EditForm Model="@refRole" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator/>
+            <Blazorise.ValidationSummary/>
+            <div class="container control border-5 block border-primary">
+                <div class="control">
+                    <label class="is-flex is-justify-content-space-between">
+                        Role:
+                    </label>
+                    <InputText @attributes="InputAttributes" @bind-Value="refRole.RoleName"/>
+                </div>
+
+                <div class="control">
+                    <label class="is-flex is-justify-content-space-between">
+                        Role Code:
+                    </label>
+                    <InputText @attributes="InputAttributes" @bind-Value="refRole.RoleCode"/>
+                </div>
+                <div class="control is-vcentered block container">
+                    <label class=" is-vcentered block is-justify-content-space-between">
+                        Role Type:
+                    </label>
+                    <Select TValue="String" Class="select is-flex is-full is-vcentered" @bind-SelectedValue="refRole.RoleType.itemCode">
+                        <SelectItem >Pilih Satu</SelectItem>
+                        @foreach (var item in ListKlasifikasi)
+                        {
+                            <SelectItem Value="@item.itemCode">@item.itemName</SelectItem>
+                        }
+                    </Select>
+                </div >
+                <div class="is-flex block is-justify-content-space-between">
+                    <div></div>
+                    <button class="is-success button" type="submit">tambah</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+    <div class="block">
+        <h2>To be Saved Roles:</h2>
+        <div class="block table-info border-top">
+            <TableTemplate Items="insertlistRoles">
+                <TableHeader>
+                    <th>Role Name</th>
+                    <th>Role Code</th>
+                    <th>Role Type</th>
+                    <th class="has-text-centered">Delete</th>
+                </TableHeader>
+                <RowTemplate Context="refRolee">
+                    <td>@refRolee.RoleName</td>
+                    <td>@refRolee.RoleCode</td>
+                    <td>@refRolee.RoleType.itemCode</td>
+                    <td class="has-text-centered">
+                        <button @onclick="@(a => deleteTemp(refRolee))" class="is-danger button">delete</button>
+                    </td>
+                </RowTemplate>
+            </TableTemplate>
+        </div>
+
+    </div>
+    <div class="is-flex is-justify-content-space-between">
+        <div></div>
+        <button class="button is-primary" @onclick="Save">save</button>
+    </div>
+    <div class="block">
+        <h2>List All Roles:</h2>
+        <div class="block border-top">
+            <TableTemplate Items="listRoles">
+                <TableHeader>
+                    <th>Role Name</th>
+                    <th>Role Code</th>
+                    <th>Role Type</th>
+                    <th class="has-text-centered">Delete</th>
+                </TableHeader>
+                <RowTemplate Context="refRolee">
+                    <td>@refRolee.RoleName</td>
+                    <td>@refRolee.RoleCode</td>
+                    <td>@refRolee.RoleType.itemCode </td>
+                    <td class="has-text-centered">
+                        <button @onclick="@(a => deleteRole(refRolee))" class="is-danger button">delete</button>
+                    </td>
+                </RowTemplate>
+            </TableTemplate>
+        </div>
+    </div>
+</div>
+
+<style>
+    .table { }
+</style>
+
+@code {
+    private string errormessage = string.Empty;
+    private RefRole refRole = new RefRole();
+    private CrudMongo cm = new CrudMongo();
+    List<RefRole> listRoles = new List<RefRole>();
+    private List<RefRole> insertlistRoles = new List<RefRole>();
+    private List<RefMasterItem> ListKlasifikasi = new List<RefMasterItem>();
+    Dictionary<string, object> InputAttributes { get; set; } =
+        new()
+        {
+            {"class", "input"}
+        };
+
+    protected override void OnInitialized()
+    {
+        listRoles = cm.GetRefRoles();
+        ListKlasifikasi = cm.GetRefMaster("PLYAN").ItemList;
+        refRole.RoleType = ListKlasifikasi[1];
+    }
+
+    private void error(string error = "")
+    {
+        JsRuntime.InvokeVoidAsync("alert", error);
+    }
+
+    private void HandleValidSubmit()
+    {
+        if (listRoles.Select(a => a.RoleCode).ToList().Contains(refRole.RoleCode)
+            || insertlistRoles.Select(a => a.RoleCode).ToList().Contains(refRole.RoleCode
+                ))
+        {
+            error("Tidak Boleh ada Role Code yang duplikat");
+            return;
+        }
+        insertlistRoles.Add(refRole);
+        refRole = new RefRole();
+    }
+
+    private void Save()
+    {
+        cm.InputRefRole(insertlistRoles);
+        insertlistRoles = new List<RefRole>();
+        listRoles = cm.GetRefRoles();
+    }
+
+    private void deleteTemp(RefRole removed)
+    {
+        insertlistRoles.Remove(removed);
+    }
+
+    private void deleteRole(RefRole remove)
+    {
+        CrudMongo cm = new CrudMongo();
+        cm.DeleteRole(remove);
+        listRoles = cm.GetRefRoles();
+    }
+
+}

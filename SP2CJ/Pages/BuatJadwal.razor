@@ -1,0 +1,48 @@
+﻿@page "/BuatJadwal"
+@using Models
+
+<PageTitle>Buat Jadwal</PageTitle>
+<h1>Buat Jadwal</h1>
+
+<div class="block column">
+    <EditForm Model="@newJadwal" OnValidSubmit="@HandleInput">
+        <div class="control">
+            <label class="is-flex is-justify-content-space-between">
+                Tanggal:
+            </label>
+            <DatePicker  @bind-Date="@newJadwal.tanggal">
+            </DatePicker>
+        </div>
+
+
+    </EditForm>
+    
+    
+
+</div>
+
+
+
+
+
+
+
+
+@code {
+    Jadwal newJadwal = new();
+    List<RefMasterItem> listIbadah = new();
+
+    protected override void OnInitialized()
+    {
+        listIbadah = FService.GetRefMasterItems("IBDH").Invoke(CancellationToken.None).ItemList;
+        var now = DateTime.Now;
+        newJadwal.tanggal = now.AddDays(7 - (int) now.DayOfWeek); 
+    }
+
+    private void HandleInput()
+    {
+        newJadwal = new Jadwal();
+    }
+
+
+}

@@ -1,0 +1,63 @@
+﻿@using Twilio.Rest.Api.V2010.Account.Usage.Record
+<div class="top-row block container is-vcentered columns navbar-dark is-mobile">
+    <div class="column container is-8" ><a class="title" style="color: aquamarine" href="" ><h2>SP2CJ</h2></a></div>
+    <div class="column is-offset-2" @onclick="ToggleNavMenu" hidden="@(!collapseNavMenu)">
+        <span class="is-large">
+            <i class="fas fa-bars is-clickable	" style="color: aquamarine"></i>
+        </span>
+    </div>
+
+</div>
+
+
+<div class="" id="Menu" hidden="@(!collapseNavMenu)" @ref="Menu" >
+    <nav class="menu" >
+        <div class="nav-item  menu-label">
+            <NavLink class="nav-link px-3" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item menu-label">
+            <NavLink class="nav-link  px-3" href="insertJemaat">
+                <span class="oi" aria-hidden="true" ><i class="fa-solid fa-person-circle-plus"></i> </span> Tambah Jemaat
+            </NavLink>
+        </div>
+        <div class="nav-item menu-label">
+            <NavLink class="nav-link  px-3" href="editJemaat">
+                <span class="oi " aria-hidden="true"><i class="fa-solid fa-people-group"></i> </span> Edit/Lihat Jemaat
+            </NavLink>
+        </div>
+        <div class= "nav-item  menu-label">
+            <NavLink class="nav-link px-3" href="/BuatJadwal">
+                <span class="oi" aria-hidden="true"> <i class="fa-solid fa-calendar"></i></span> Buat Jadwal
+            </NavLink>
+        </div>
+        <div class="nav-item menu-label">
+            <NavLink class="nav-link  px-3" href="LihatJadwal">
+                <span class="oi" aria-hidden="true"> <i class="fa-solid fa-calendar"></i></span> Lihat Jadwal
+            </NavLink>
+        </div>
+        <div class="nav-item  menu-label">
+            <NavLink class="nav-link px-3" href="InsertRole">
+                <span class="oi" aria-hidden="true"><i class="fa-solid fa-building-user"></i></span> Buat Peranan Pelayan
+            </NavLink>
+        </div>
+        <div class="nav-item  menu-label">
+            <NavLink class="nav-link px-3" href="JenisPelayanan">
+                <span class="oi" aria-hidden="true"><i class="fa-solid fa-building"></i></span> Buat Jenis Pelayan
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+    ElementReference Menu;
+    //private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+       
+    }
+}

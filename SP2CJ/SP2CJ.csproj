@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>02c8fa49-54ac-4bc7-9074-8b3d6a1f7ad0</UserSecretsId>
+		<DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Blazorise.Bulma" Version="1.0.6" />
+		<PackageReference Include="Blazorise.Components" Version="1.0.6" />
+		<PackageReference Include="Blazorise.DataGrid" Version="1.0.6" />
+		<PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.6" />
+		<PackageReference Include="Microsoft.JSInterop" Version="6.0.7" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+		<PackageReference Include="MongoDB.Bson" Version="2.17.1" />
+		<PackageReference Include="MongoDB.Driver" Version="2.17.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
+		<PackageReference Include="PuppeteerSharp" Version="7.1.0" />
+		<PackageReference Include="System.Text.Json" Version="6.0.5" />
+		<PackageReference Include="Twilio" Version="5.78.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\FSService\FSService.fsproj" />
+	</ItemGroup>
+
+</Project>

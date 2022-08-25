@@ -1,0 +1,257 @@
+﻿@page "/insertJemaat"
+@using SP2CJ.Services
+@using Microsoft.AspNetCore.Components
+@using Models
+<div class="columns">
+    <div class="block is-one-third column">
+        <h1>Insert Data Jemaat</h1>
+        <div class="block align-content is-flex is-vcentered">
+            <PageTitle>Jemaat</PageTitle>
+            <EditForm Model="@inputPelayan" OnValidSubmit="@HandleInput">
+                <DataAnnotationsValidator/>
+                <Blazorise.ValidationSummary/>
+                <div class="control columns block">
+                    <div class="column">
+                        <div class="control">
+                            <label class="is-flex is-justify-content-space-between">
+                                Nama:
+                            </label>
+                            <InputText @attributes="InputAttributes" @bind-Value="inputPelayan.Name"/>
+                        </div>
+                        <div class="control">
+                            <label class="is-flex is-justify-content-space-between">
+                                Nama Lengkap:
+                            </label>
+                            <InputText @attributes="InputAttributes" @bind-Value="inputPelayan.FullName"/>
+                        </div>
+                        <div class="control">
+                            <label class="is-flex is-justify-content-space-between">
+                                Nomor HandPhone:
+                            </label>
+                            <InputText @attributes="InputAttributes" @bind-Value="inputPelayan.nomorHandphone"/>
+                        </div>
+                        <div class="control">
+                            <label class="is-flex is-justify-content-space-between">
+                                ID Line:
+                            </label>
+                            <InputText @attributes="InputAttributes" @bind-Value="inputPelayan.idLine"/>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="control">
+                            <label class="is-flex is-justify-content-space-between">
+                                Filter Pelayanan:
+                            </label>
+                            <input type="text"  @bind:event="oninput" @onkeyup="@FilterName"  @attributes="InputAttributes" @bind="filterRoleName"/>
+                        </div>
+                        <div class="control is-vcentered container">
+                            <label class=" is-vcentered block is-justify-content-space-between">
+                                Filter Jenis Pelayanan
+                            </label>
+                            <Select  TValue="String" Class="select is-flex is-full is-vcentered" SelectedValueChanged="@OnSelectedValueChanged" SelectedValue="filterRoleType">
+                                <SelectItem Value="All" >Pilih Satu</SelectItem>
+                                @foreach (var item in ListKlasifikasi)
+                                {
+                                    <SelectItem Value="@item.itemCode">@item.itemName</SelectItem>
+                                }
+                            </Select>
+                        </div >
+                    </div>
+                </div>
+
+                <button type="submit" class="button is-pulled-right is-primary">Tambah</button>
+            </EditForm>
+        </div>
+    </div>
+<Div class="column table-container">
+    <DataGrid TItem="RefRole"
+              Data="Filtered"
+              Responsive
+              @bind-PageSize="@tableLimit"
+              CommandMode="DataGridCommandMode.ButtonRow"
+              SelectionMode="DataGridSelectionMode.Multiple"
+              @bind-SelectedRows="SelectedRoles"
+              Class="table is-striped is-narrow is-hoverable"
+              FixedHeader
+              FixedHeaderDataGridMaxHeight="40vh"
+              HeaderRowStyling="@(new DataGridRowStyling { Class = "has-background-primary" })"
+    >
+        <DataGridColumn Field="@nameof(RefRole.RoleName)" Caption="Pelayanan" Editable="true"></DataGridColumn>
+        <DataGridColumn Field="@nameof(RefRole.TypeName)" Caption="Jenis Pelayanan" Editable="true"></DataGridColumn>
+    </DataGrid>
+</Div>
+</div> 
+    <Div class="table-container block">
+        <table class="table-hover table">
+            <thead>
+            <tr>
+                <th>
+                    Nama
+                </th>
+                <th>
+                    Nama Lengkap
+                </th>
+                <th>
+                    Nomor Handphone
+                </th>
+                <th>
+                    ID Line
+                </th>
+                <th>
+                    Pelayanan
+                </th>
+                <th>
+                    Edit
+                </th>
+                <th>
+                    Delete
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var itemSaved in tobeSaved)
+            {
+                <tr>
+                    <td>
+                        @itemSaved.Name
+                    </td>
+                    <td>
+                        @itemSaved.FullName
+                    </td>
+                    <td>
+                        @itemSaved.nomorHandphone
+                    </td>
+                    <td>
+                        @itemSaved.idLine
+                    </td>
+                    <td>
+                        <div class="dropdown is-hoverable">
+                            <div class="dropdown-trigger">
+                                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                                    <span>Lihat Pelayanan</span>
+                                    <span class="icon is-small">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-content" style="position: fixed">
+                                    @foreach (var role in itemSaved.Roles)
+                                    {
+                                        <a class="dropdown-item">
+                                            @role.RoleName
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <button @onclick="@(a => Edit(itemSaved))" class="button is-secondary">Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button @onclick="@(a => Delete(itemSaved))" class="button is-danger">Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <button class="button is-success is-pulled-right" onclick="@saveJemaats">Save</button>
+    </Div>
+
+
+@code {
+    Jemaat inputPelayan = new Jemaat();
+    static string All = "All";
+    CrudMongo cm = new CrudMongo();
+    List<Jemaat> tobeSaved = new List<Jemaat>();
+    int tableLimit = 50;
+    public List<RefRole> GridSelect = new List<RefRole>();
+    List<RefRole> SelectedRoles
+    {
+        set => inputPelayan.Roles = value;
+        get => inputPelayan.Roles;
+    }
+    List<RefRole> Filtered = new List<RefRole>();
+
+    string filterRoleName = string.Empty;
+    string filterRoleType = "All";
+
+    List<RefMasterItem> ListKlasifikasi = new List<RefMasterItem>();
+
+    List<Jemaat> TobeEdited = new List<Jemaat>();
+
+    Jemaat Saved = new Jemaat();
+
+    bool isediting = false;
+    int indexEdit = -1;
+    Task OnSelectedValueChanged( string roleCode)
+    {
+        Filtered = roleCode == All ?  GridSelect : SelectedRoles.Concat(GridSelect.Where(a => a.RoleType.itemCode != null && a.RoleType.itemCode.Equals(roleCode))).Distinct().ToList();
+
+        return Task.CompletedTask;
+    }
+    #region Attributes
+
+    void FilterName()
+    {
+        Filtered = filterRoleName == String.Empty ? GridSelect : SelectedRoles.Concat(GridSelect.Where(a => a.RoleName.ToUpper().Contains(filterRoleName.ToUpper()))).Distinct().ToList();
+    }
+
+    Dictionary<string, object> InputAttributes { get; set; } =
+        new()
+        {
+            { "class", "input" }
+        };
+
+    #endregion
+    private bool RowSelectableHandler( RowSelectableEventArgs<RefRole> rowSelectableEventArgs )
+        => rowSelectableEventArgs.SelectReason is not DataGridSelectReason.RowClick;
+    void HandleInput()
+    {
+        if (!isediting){
+            tobeSaved.Add(inputPelayan);
+            inputPelayan = new Jemaat();
+        }
+        else
+        {
+            tobeSaved[indexEdit] = inputPelayan;
+            inputPelayan = Saved;
+            isediting = false;
+        }
+    }
+    protected override void OnInitialized()
+    {
+        GridSelect = cm.GetRefRoles();
+        Filtered = GridSelect;
+        ListKlasifikasi = cm.GetRefMaster("PLYAN").ItemList;
+        
+
+    }
+
+    void saveJemaats()
+    {
+        CrudMongo cm = new CrudMongo();
+
+        cm.InsertJemaats(tobeSaved);
+        tobeSaved = new List<Jemaat>();
+    }
+
+    void Edit(Jemaat edited)
+    {
+        Saved = inputPelayan;
+        inputPelayan = edited;
+        indexEdit = tobeSaved.FindIndex(a => a.Equals(edited));
+        isediting = true;
+    }
+
+
+    void Delete(Jemaat deleted)
+    {
+        tobeSaved.Remove(deleted);
+    }
+
+    
+}

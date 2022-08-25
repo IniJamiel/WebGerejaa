@@ -36,7 +36,8 @@
     {
         listIbadah = FService.GetRefMasterItems("IBDH").Invoke(CancellationToken.None).ItemList;
         var now = DateTime.Now;
-        newJadwal.tanggal = now.AddDays(7 - (int) now.DayOfWeek); 
+        newJadwal.tanggal = now.AddDays(7 - (int) now.DayOfWeek);
+        var a = "string";
     }
 
     private void HandleInput()

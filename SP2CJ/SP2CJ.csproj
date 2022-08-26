@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -13,6 +13,7 @@
 		<PackageReference Include="Blazorise.Components" Version="1.0.6" />
 		<PackageReference Include="Blazorise.DataGrid" Version="1.0.6" />
 		<PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.6" />
+		<PackageReference Include="FSharp.Core" Version="6.0.5" />
 		<PackageReference Include="Microsoft.JSInterop" Version="6.0.7" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
 		<PackageReference Include="MongoDB.Bson" Version="2.17.1" />

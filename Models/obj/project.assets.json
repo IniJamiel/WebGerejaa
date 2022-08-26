@@ -728,24 +728,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\isaiah.jamiel\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Valerie\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\isaiah.jamiel\\Documents\\GitHub\\webGodot\\dist\\webGodot\\browser\\WebGerejaa\\Models\\Models.csproj",
+      "projectUniqueName": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\Models\\Models.csproj",
       "projectName": "Models",
-      "projectPath": "C:\\Users\\isaiah.jamiel\\Documents\\GitHub\\webGodot\\dist\\webGodot\\browser\\WebGerejaa\\Models\\Models.csproj",
-      "packagesPath": "C:\\Users\\isaiah.jamiel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\isaiah.jamiel\\Documents\\GitHub\\webGodot\\dist\\webGodot\\browser\\WebGerejaa\\Models\\obj\\",
+      "projectPath": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\Models\\Models.csproj",
+      "packagesPath": "C:\\Users\\Valerie\\.nuget\\packages\\",
+      "outputPath": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\Models\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\isaiah.jamiel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Valerie\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -753,8 +748,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://r3app-server:5400/v3/index.json": {},
-        "http://r3app-server:5500/v3/index.json": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -804,7 +797,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

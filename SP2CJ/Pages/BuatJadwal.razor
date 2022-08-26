@@ -13,8 +13,33 @@
             <DatePicker  @bind-Date="@newJadwal.tanggal">
             </DatePicker>
         </div>
-
-
+        <div class="control">
+            <label class="is-flex is-justify-content-space-between">
+                Jenis Ibadah:
+            </label>
+            <Select @bind-SelectedValue="@newJadwal.JenisJadwal">
+                @foreach (var list in listIbadah)
+                {
+                    <SelectItem Value="list.itemName">@list.itemName</SelectItem>
+                }
+            </Select>
+        </div>
+        <div class="control">
+            <label class="is-flex is-justify-content-space-between">
+                Tema:
+            </label>
+            <InputText @attributes="InputAttributes" @bind-Value="@newJadwal.Tema"/>
+        </div>
+        @foreach()
+        {
+            <div class="control">
+                <label class="is-flex is-justify-content-space-between">
+                    Tema:
+                </label>
+                <InputText @attributes="InputAttributes" @bind-Value="@newJadwal.Tema"/>
+            </div>
+        }
+        
     </EditForm>
     
     
@@ -22,15 +47,11 @@
 </div>
 
 
-
-
-
-
-
-
 @code {
     Jadwal newJadwal = new();
     List<RefMasterItem> listIbadah = new();
+    List<RefMasterItem> listRoleType = new();
+
 
     protected override void OnInitialized()
     {

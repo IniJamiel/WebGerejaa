@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "Jj99g8Czbj86RmJRivrRGKlpw/pcU/gmWHY/6ecAfj0=",
+  "Source": "FSService",
+  "BasePath": "_content/FSService",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\Models\\Models.csproj",
+      "Version": 2,
+      "Source": "Models",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

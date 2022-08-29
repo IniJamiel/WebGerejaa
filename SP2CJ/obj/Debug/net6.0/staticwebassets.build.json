@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Et+UgUz+ar5miB0T7oLMXwEnu+34sEKiTpGrXyVyyvs=",
+  "Hash": "gdXZ/Qtliv2Z/eWDteG2ii5XvO5ykVSfKeCKKJ1QikY=",
   "Source": "SP2CJ",
   "BasePath": "_content/SP2CJ",
   "Mode": "Default",
@@ -771,6 +771,23 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
+      "Identity": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\SP2CJ\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "SourceId": "SP2CJ",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\SP2CJ\\wwwroot\\",
+      "BasePath": "_content/SP2CJ",
+      "RelativePath": "css/open-iconic/FONT-LICENSE",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
+    },
+    {
       "Identity": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\SP2CJ\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "SourceId": "SP2CJ",
       "SourceType": "Discovered",
@@ -871,23 +888,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
-    },
-    {
-      "Identity": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\SP2CJ\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
-      "SourceId": "SP2CJ",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\SP2CJ\\wwwroot\\",
-      "BasePath": "_content/SP2CJ",
-      "RelativePath": "css/open-iconic/FONT-LICENSE",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
       "Identity": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\SP2CJ\\wwwroot\\css\\open-iconic\\ICON-LICENSE",

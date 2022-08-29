@@ -6,7 +6,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<OutputType>Exe</OutputType>
 		<IsPublishable>False</IsPublishable>
-		<SelfContained>False</SelfContained>
 	</PropertyGroup>
 
 	<ItemGroup>

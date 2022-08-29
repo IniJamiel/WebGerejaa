@@ -1,8 +1,11 @@
-﻿using System.Text.Json.Nodes;
+﻿using System.Runtime.CompilerServices;
+using System.Text.Json.Nodes;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.AspNetCore.SignalR;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Microsoft.FSharp.Collections;
+using Microsoft.VisualBasic;
 using Models;
 
 
@@ -110,14 +113,60 @@ public class CrudMongo
         return Task.CompletedTask;
     }
 
-    public List<Jemaat> GetallJemaat()
+    private List<Jemaat> GetAllJemaat =
+        Collections.JemaatCollection().Find(a => true).ToList();
+
+
+    public List<Jemaat> GetAvailable(DateTime tanggal)
     {
-        var coll = JemaatCollection();
-        var test = coll.Find(a => true).ToEnumerable().Select(a => a.Roles.Count).ToList();
+        var unavail = Collections.JadwalCollection().Find(a => a.tanggal == tanggal).ToList();
+        var listJemaat = unavail.SelectMany(a => a.Pelayans.Select(a => a.Jemaat.Id));
+        return Collections.JemaatCollection().Find(a => !listJemaat.Contains(a.Id)).ToList();
+    }
 
+    public Dictionary<string, List<Jemaat>> pelayansSorted(DateTime tanggal)
+    {
+        Dictionary<string, List<Jemaat>> returned = new();
+        var listRoleType = FService.GetRefMasterItems("PLYAN").Invoke(CancellationToken.None).ItemList;
 
-        return coll.Find(a => true).ToList();
+        var Pelayans = GetAvailable(tanggal);
+
+        for (int a = 0; a < listRoleType.Count(); a++)
+        {
+            var roleType = listRoleType[a].itemCode;
+            if (roleType != null)
+                returned[roleType] = Pelayans.Where(alinq => alinq.Roles.Any(x => x.RoleType.itemCode == roleType)).ToList();
+        }
+        return returned;
+    }
+
+    public Task submitJadwal(Jadwal baru)
+    {
+        try
+        {
+            Collections.JadwalCollection().InsertOne(baru);
+            return Task.CompletedTask;
+
+        }
+        catch
+        {
+            return Task.FromCanceled(CancellationToken.None);
+        }
+    }
+
+    public List<Jadwal> GetJadwals(DateTime min, DateTime max)
+    {
+        return Collections.JadwalCollection().Find(a => a.tanggal >= min && a.tanggal <= max).ToList();
+    }
+
+    public void InputRenungan(Renungan renung)
+    {
+        Collections.RenunganCollection().InsertOne(renung);
 
     }
 
+    public List<Renungan> BacaBoiHariIni()
+    {
+        return Collections.RenunganCollection().Find(a => a.Tanggal == DateTime.Now);
+    }
 }

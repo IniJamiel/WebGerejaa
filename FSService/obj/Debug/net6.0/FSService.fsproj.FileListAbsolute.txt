@@ -111,3 +111,4 @@ C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGereja
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\FSService\obj\Debug\net6.0\FSService.pdb
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\FSService\obj\Debug\net6.0\FSService.genruntimeconfig.cache
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\FSService\bin\Debug\net6.0\.filenesting.json
+D:\webGereja\SP2CJWEB\SP2CJ.web\FSService\bin\Debug\net6.0\.filenesting.json

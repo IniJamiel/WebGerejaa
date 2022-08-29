@@ -1,0 +1,29 @@
+﻿@using Models
+@using SP2CJ.Services
+@page "/BacaBoi"
+<h3>Renungan Hari ini</h3>
+
+<div class="container block columns is-half">
+    
+    @foreach(var renung in renungans){
+        <div class="block">
+            <h4>@renung.Judul</h4>
+            <h5>Ditulis oleh: @renung.penulis</h5>
+            <a>@renung.Isi</a>
+        </div>
+    }
+</div>
+
+
+
+@code {
+    List<Renungan> renungans = new List<Renungan>();
+    CrudMongo cm = new CrudMongo();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        renungans = cm.BacaBoiHariIni();
+    }
+
+}

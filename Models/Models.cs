@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver.Linq;
 
 namespace Models;
 
@@ -17,6 +18,8 @@ public class DatabaseSetting
     public static string RefRoleCollectionName { get; set; } = "RefRole";
     public static string JadwalCollectionName { get; set; } = "Jadwal";
     public static string RefMasterCollectionName { get; set; } = "RefMaster";
+
+    public static string MiscelanousCollectionName { get; set; } = "Miscelanous";
 }
 
 public class Jemaat
@@ -59,7 +62,7 @@ public class RefRole
 
 public class Jadwal
 {
-    
+
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public String? Id { get; set; }
@@ -68,21 +71,65 @@ public class Jadwal
     public DateTime tanggal { get; set; }
     public String JenisJadwal { get; set; } = null!;
 
-    public List<Pelayan> Pelayans {
-        set;
-        get;
-    }
 
+    public Dictionary<string, List<Pelayan>> PelayansJadwal = new();
+
+    public List<Pelayan> Pelayans => PelayansJadwal.SelectMany(a => a.Value).ToList();
     public String Tema { set; get; }
-    public List<string> GetPelayan => Pelayans.Select(a => a.JemaatId).ToList();
 }
 
 public class Pelayan
 {
-    public String JemaatId { set; get; }
-    public String RoleId { set; get; }
+    public Pelayan(RefRole role, Jemaat jemaat, string roleCode)
+    {
+        Role = role;
+        Jemaat = jemaat;
+        RoleCode = roleCode;
+    }
+    public string RoleCode { set; get; }
+    public Jemaat Jemaat { set; get; }
+    public RefRole Role { set; get; }
 }
 
+public class Renungan
+{
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
+    public string Judul;
+    public string Isi;
+    public string penulis;
+    public DateTime Tanggal;
+}
+
+public class Dudu
+{
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
+    public string Dari;
+    public string Untuk;
+    public string Pesan;
+    public DateTime Tanggal;
+}
+public class Pengumuman
+{
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
+    public string Judul;
+    public string Isi;
+    public DateTime Tanggal;
+}
+
+public class About
+{
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
+    public string Judul;
+    public string Isi;
+}
 
 public class RefMaster
 {

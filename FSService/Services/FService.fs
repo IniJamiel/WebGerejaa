@@ -2,12 +2,15 @@ module FService
 open MongoDB.Driver
 open MongoDB.Bson
 open Models
-
+open System
+open System.Text
 
 let ListAllJemaat  =
     Models.Collections.JemaatCollection().Find(fun _ -> true ).ToEnumerable<Jemaat>
 
 let CollJemaat = Collections.JemaatCollection()
+
+let CollJadwal = Collections.JadwalCollection()
 
 let DeleteJemaat (jemaatDiKill) = 
     CollJemaat.DeleteOne(fun a -> a = jemaatDiKill)
@@ -21,4 +24,3 @@ let ListAllJemaatJson  =
 
 let GetRefMasterItems (Code : string) =
     Collections.RefMasterCollection().Find(fun a -> a.RefMasterCode = Code).First
-

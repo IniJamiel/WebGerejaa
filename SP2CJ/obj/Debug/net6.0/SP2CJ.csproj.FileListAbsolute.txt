@@ -218,3 +218,4 @@ C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGereja
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\SP2CJ.genruntimeconfig.cache
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\ref\SP2CJ.dll
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\.filenesting.json
+D:\webGereja\SP2CJWEB\SP2CJ.web\SP2CJ\bin\Debug\net6.0\.filenesting.json

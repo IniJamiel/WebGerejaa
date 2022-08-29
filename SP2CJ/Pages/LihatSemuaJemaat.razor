@@ -212,16 +212,15 @@
         GridSelect = cm.GetRefRoles();
         Filtered = GridSelect;
         ListKlasifikasi = cm.GetRefMaster("PLYAN").ItemList;
-        
-
     }
     void FilterName()
     {
-        Filtered = filterRoleName == String.Empty ? GridSelect : SelectedRoles.Concat(GridSelect.Where(a => a.RoleName.ToUpper().Contains(filterRoleName.ToUpper()))).Distinct().ToList();
+        Filtered = SelectedRoles.Concat(GridSelect.Where(a => a.RoleName.ToUpper().Contains(filterRoleName.ToUpper()))).DistinctBy(a => a.Id).ToList();
     }
     private void Edit(Jemaat edit)
     {
         editJemaat = edit;
+        FilterName();
         EditorVisible = true;
     }
 

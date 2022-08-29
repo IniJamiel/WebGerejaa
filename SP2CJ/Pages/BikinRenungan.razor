@@ -1,0 +1,44 @@
+﻿@using Models
+@using SP2CJ.Services
+@page "/BikinRenungan"
+<h3>BikinRenungan</h3>
+
+<div class="block columns">
+    <div class="container block is-half column is-pulled-left is-vcentered">
+        <EditForm Model="@newRenungan" OnValidSubmit="@HandleInput">
+            <div class="control block">
+                <label class=" is-justify-content-space-between">
+                    Penulis:
+                </label>
+                <input @bind="newRenungan.Judul" />
+            </div>
+            <div class="control block">
+                <label class=" is-justify-content-space-between">
+                    Judul:
+                </label>
+                <input  @bind="newRenungan.Judul" />
+            </div>
+            <div class="control block">
+                <label class=" is-justify-content-space-between">
+                    Isi:
+                </label>
+                <input  Class="textarea" @bind="newRenungan.Isi" />
+            </div>
+            <DatePicker  Date="@newRenungan.Tanggal" >
+            </DatePicker>
+            <button class="is-pulled-right button">simpan</button>
+        </EditForm>
+    </div>
+</div>
+
+
+@code {
+    Renungan newRenungan = new Renungan();
+    CrudMongo cm = new CrudMongo();
+    
+    private void HandleInput()
+    {
+        cm.InputRenungan(newRenungan);
+        newRenungan = new Renungan();
+    }
+}

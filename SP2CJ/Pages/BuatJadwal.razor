@@ -1,70 +1,147 @@
 ﻿@page "/BuatJadwal"
 @using Models
+@using SP2CJ.Services
+@using Microsoft.AspNetCore.Mvc.ApiExplorer
 
 <PageTitle>Buat Jadwal</PageTitle>
 <h1>Buat Jadwal</h1>
 
-<div class="block column">
-    <EditForm Model="@newJadwal" OnValidSubmit="@HandleInput">
-        <div class="control">
-            <label class="is-flex is-justify-content-space-between">
-                Tanggal:
-            </label>
-            <DatePicker  @bind-Date="@newJadwal.tanggal">
-            </DatePicker>
-        </div>
-        <div class="control">
-            <label class="is-flex is-justify-content-space-between">
-                Jenis Ibadah:
-            </label>
-            <Select @bind-SelectedValue="@newJadwal.JenisJadwal">
-                @foreach (var list in listIbadah)
-                {
-                    <SelectItem Value="list.itemName">@list.itemName</SelectItem>
-                }
-            </Select>
-        </div>
-        <div class="control">
-            <label class="is-flex is-justify-content-space-between">
-                Tema:
-            </label>
-            <InputText @attributes="InputAttributes" @bind-Value="@newJadwal.Tema"/>
-        </div>
-        @foreach()
-        {
-            <div class="control">
-                <label class="is-flex is-justify-content-space-between">
+<div class="block columns">
+    <div class="container block is-half column is-pulled-left is-vcentered">
+        <EditForm Model="@newJadwal" OnValidSubmit="@HandleInput">
+            <div class="control block">
+                <label class=" is-justify-content-space-between">
+                    Tanggal:
+                </label>
+                <DatePicker TValue="DateTime" DateChanged="@Datechangedevent" Date="@newJadwal.tanggal" >
+                </DatePicker>
+            </div>
+            <div class="control block">
+                <label class="ignoreFlex is-justify-content-space-between">
+                    Jenis Ibadah:
+                </label>
+                <Select @bind-SelectedValue="@newJadwal.JenisJadwal">
+                    @foreach (var list in listIbadah)
+                    {
+                        <SelectItem Value="list.itemName">@list.itemName</SelectItem>
+                    }
+                </Select>
+            </div>
+            <div class="control block">
+                <label class="ignoreFlex is-justify-content-space-between">
                     Tema:
                 </label>
                 <InputText @attributes="InputAttributes" @bind-Value="@newJadwal.Tema"/>
             </div>
-        }
-        
-    </EditForm>
-    
-    
+            @foreach (var role in listRoleType)
+            {
+                <div class="control block is-bordered">
+                    <label class="ignoreFlex is-justify-content-space-between">
+                        @role.itemName:
+                    </label>
+                    <table class="table is-striped is-hoverable">
+                        <tr>
+                            <th>Nama</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+                        @foreach (var loop in pelayanSelected[role.itemCode])
+                        {
+                            
+                                <tr class="is-selected">
+                                    <td>@loop.Jemaat.FullName</td>
+                                    <td>@loop.Role.RoleName</td>
+                                    <td>
+                                        <button @onclick="() => deletePelayan(role.itemCode, loop)" type="button" class="is-small button is-danger">Hapus</button>
+                                    </td>
+                                </tr>
+                            
+                        }
+                        @foreach (var loop in pelayans[role.itemCode])
+                        {
 
+                            @foreach (var roleJemaat in @loop.Roles)
+                            {
+                                <tr>
+                                    <td>@loop.FullName</td>
+                                    <td>@roleJemaat.RoleName</td>
+                                    <td>
+                                        <button type="button" @onclick="() => addPelayan(role.itemCode,loop,roleJemaat)" class="is-small button is-primary">Pilih</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            }
+            <tr>
+                <div class="block">
+                    <button type="submit" class="is-pulled-right button is-success">Simpan</button>
+                </div>
+            </tr>
+        </EditForm>
+    </div>
 </div>
+
+@inject NavigationManager _navigationManager
 
 
 @code {
+    CrudMongo cm = new CrudMongo();
     Jadwal newJadwal = new();
     List<RefMasterItem> listIbadah = new();
     List<RefMasterItem> listRoleType = new();
+    Dictionary<string, List<Jemaat>> pelayans = new();
+    Dictionary<string, List<Pelayan>> pelayanSelected = new();
 
+    private void addPelayan(string code, Jemaat jemaat, RefRole role)
+    {
+        pelayanSelected[code].Add(new Pelayan(role, jemaat, code));
+        pelayans[code].Remove(jemaat);
+    }
+
+    private void deletePelayan(string code, Pelayan pelayan)
+    {
+        pelayanSelected[code].Remove(pelayan);
+        pelayans[code].Add(pelayan.Jemaat);
+    }
 
     protected override void OnInitialized()
     {
         listIbadah = FService.GetRefMasterItems("IBDH").Invoke(CancellationToken.None).ItemList;
+        listRoleType = FService.GetRefMasterItems("PLYAN").Invoke(CancellationToken.None).ItemList;
         var now = DateTime.Now;
+        foreach (var a in listRoleType)
+        {
+            pelayanSelected[a.itemCode] = new List<Pelayan>();
+        }
         newJadwal.tanggal = now.AddDays(7 - (int) now.DayOfWeek);
-        var a = "string";
+        pelayans = cm.pelayansSorted(newJadwal.tanggal);
+        newJadwal.JenisJadwal = listIbadah[0].itemName;
     }
 
     private void HandleInput()
     {
+        newJadwal.PelayansJadwal = pelayanSelected;
+        cm.submitJadwal(newJadwal);
+        _navigationManager.NavigateTo("/BuatJadwal");
         newJadwal = new Jadwal();
+        newJadwal.tanggal = DateTime.Now;
     }
+    Dictionary<string, object> InputAttributes { get; set; } =
+        new()
+        {
+            { "class", "input" }
+        };
 
-
+    void Datechangedevent(DateTime date)
+    {
+        pelayans = cm.pelayansSorted(newJadwal.tanggal);
+        newJadwal = new();
+        newJadwal.tanggal = date;
+        foreach (var a in listRoleType)
+        {
+            pelayanSelected[a.itemCode] = new List<Pelayan>();
+        }
+    }
 }

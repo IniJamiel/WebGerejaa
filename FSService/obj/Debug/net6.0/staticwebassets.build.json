@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "iSv7/i26qtlJLw3NHW+I5YU79r31s5yqS5rvqJVP35k=",
+  "Hash": "lYfR8MVaEbJQJIRSfnZxrO8xX3AO8HH2ngcp9+2K2AU=",
   "Source": "FSService",
   "BasePath": "_content/FSService",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\isaiah.jamiel\\Documents\\GitHub\\webGodot\\dist\\webGodot\\browser\\WebGerejaa\\Models\\Models.csproj",
+      "Identity": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\Models\\Models.csproj",
       "Version": 2,
       "Source": "Models",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

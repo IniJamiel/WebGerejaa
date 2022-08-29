@@ -1,1 +1,61 @@
-﻿
+﻿@page "/LihatJadwal"
+@using Models
+@using SP2CJ.Services
+
+
+<div class="container block">
+    <div class="block columns">
+        <div class="column control">
+            <label class=" is-justify-content-space-between">
+                Tanggal awal:
+            </label>
+            <DatePicker TValue="DateTime" DateChanged="@Datechangedevent" Date="@Range1">
+            </DatePicker>
+        </div>
+        <div class="column control">
+            <label class=" is-justify-content-space-between">
+                Tanggal akhir:
+            </label>
+            <DatePicker TValue="DateTime" DateChanged="@Datechangedevent" Date="@Range2">
+            </DatePicker>
+        </div>
+    </div>
+    <div class="tile is-ancestor">
+        <div class="tile">
+            @foreach (var jadwal in lihaJadwals)
+            {
+                <div class="tile is-child has-text-centered">
+                    <h3 class="has-text-weight-semibold block"> @jadwal.tanggal : @jadwal.JenisJadwal</h3>
+                    <h4 class="has-text-weight-medium block">Tema: @jadwal.Tema</h4>
+                    @foreach (var playans in jadwal.PelayansJadwal)
+                    {
+                        <h4 class="has-text-weight-medium is-underlined block">@playans.Key</h4>
+                        @foreach (var playan in @playans.Value)
+                        {
+                            <a>@playan.Jemaat.FullName, @playan.Role.RoleName</a>
+                        }
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@code {
+    List<Jadwal> lihaJadwals = new List<Jadwal>();
+    DateTime Range1 = DateTime.Now;
+    DateTime Range2 = DateTime.Now.AddDays(14);
+    CrudMongo cm = new CrudMongo();
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+
+    }
+
+    void Datechangedevent()
+    {
+        lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+    }
+}

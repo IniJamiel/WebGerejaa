@@ -167,6 +167,6 @@ public class CrudMongo
 
     public List<Renungan> BacaBoiHariIni()
     {
-        return Collections.RenunganCollection().Find(a => a.Tanggal == DateTime.Now);
+        return Collections.RenunganCollection().Find(a => a.Tanggal == DateTime.Now).ToList();
     }
 }

@@ -24,17 +24,18 @@
             @foreach (var jadwal in lihaJadwals)
             {
                 <div class="tile is-child has-text-centered">
-                    <h3 class="has-text-weight-semibold block"> @jadwal.tanggal : @jadwal.JenisJadwal</h3>
-                    <h4 class="has-text-weight-medium block">Tema: @jadwal.Tema</h4>
+                    <h4 class="has-text-weight-semibold block"> @jadwal.tanggal.ToString("dddd, dd MMMM yyyy"): @jadwal.JenisJadwal</h4>
+                    <h5 class="has-text-weight-medium block">Tema: @jadwal.Tema</h5>
+                    <div class="container">
                     @foreach (var playans in jadwal.PelayansJadwal)
                     {
-                        <h4 class="has-text-weight-medium is-underlined block">@playans.Key</h4>
+                        <h5 class="has-text-weight-medium is-underlined">@playans.Key</h5>
                         @foreach (var playan in @playans.Value)
                         {
-                            <a>@playan.Jemaat.FullName, @playan.Role.RoleName</a>
+                            <p>@playan.Jemaat.FullName, @playan.Role.RoleName</p>
                         }
-                    }
-                </div>
+                    }</div>
+                    </div>
             }
         </div>
     </div>

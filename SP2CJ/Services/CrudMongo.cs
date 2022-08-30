@@ -160,13 +160,13 @@ public class CrudMongo
 
     public void InputRenungan(Renungan renung)
     {
-        renung.Tanggal = renung.Tanggal.Date;
+        renung.Tanggal = renung.Tanggal.ToUniversalTime().Date;
         Collections.RenunganCollection().InsertOne(renung);
 
     }
 
     public List<Renungan> BacaBoiHariIni()
     {
-        return Collections.RenunganCollection().Find(a => a.Tanggal == DateTime.Now.Date).ToList();
+        return Collections.RenunganCollection().Find(a => a.Tanggal == DateTime.Now.ToUniversalTime().Date).ToList();
     }
 }

@@ -1,11 +1,11 @@
 ﻿@using Twilio.Rest.Api.V2010.Account.Usage.Record
-<div class="top-row block container is-vcentered columns navbar-dark is-mobile">
-    <div class="column container is-8" ><a class="title" style="color: aquamarine" href="" ><h2>SP2CJ</h2></a></div>
-    <div class="column is-offset-2" @onclick="ToggleNavMenu" hidden="@(!collapseNavMenu)">
-        <span class="is-large">
-            <i class="fas fa-bars is-clickable	" style="color: aquamarine"></i>
-        </span>
+<div class="top-row is-vcentered columns is-mobile">
+    <div class="column container" ><a class="title" style="color: aquamarine" href="" ><h2>SP2CJ</h2></a></div>
+    <div class="column is-pulled-right m-auto is-clickable is-clipped">
+        <i class="fas fa-bars " @onclick="ToggleNavMenu" hidden="@(!collapseNavMenu)" style="color: aquamarine"></i>
     </div>
+    
+        
 
 </div>
 
@@ -49,12 +49,12 @@
         </div>
         <div class="nav-item  menu-label">
             <NavLink class="nav-link px-3" href="BikinRenungan">
-                <span class="oi" aria-hidden="true"><i class="fa-brands fa-readme"></i></span> Baca Renungan
+                <span class="oi" aria-hidden="true"><i class="fa-solid fa-pencil"></i></span> Tulis Renungan
             </NavLink>
         </div>
         <div class="nav-item  menu-label">
             <NavLink class="nav-link px-3" href="BacaBoi">
-                <span class="oi" aria-hidden="true"><i class="fa-solid fa-pen-line"></i></span> Tulis Renungan
+                <span class="oi" aria-hidden="true"><i class="fa-brands fa-readme"></i></span> Baca Renungan
             </NavLink>
         </div>
     </nav>

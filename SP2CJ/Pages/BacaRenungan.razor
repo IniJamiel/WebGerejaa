@@ -2,13 +2,17 @@
 @page "/BacaBoi"
 <h3>Renungan Hari ini</h3>
 
-<div class="container block columns is-half">
-    
+<div class="container block is-half">
     @foreach(var renung in renungans){
-        <div class="block">
-            <h4>@renung.Judul</h4>
-            <h5>Ditulis oleh: @renung.penulis</h5>
-            <a>@renung.Isi</a>
+        <div class="block container m-auto">
+            <div class="block">
+                <h4 >@renung.Judul</h4>
+                <p >Ditulis oleh: @renung.penulis</p>
+            </div>
+            <div class="block">
+
+                <p >@renung.Isi</p>
+            </div>
         </div>
     }
 </div>

@@ -39,7 +39,12 @@
 @code {
     Renungan newRenungan = new Renungan();
     CrudMongo cm = new CrudMongo();
-    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        newRenungan.Tanggal = DateTime.Now;
+    }
+
     private void HandleInput()
     {
         cm.InputRenungan(newRenungan);

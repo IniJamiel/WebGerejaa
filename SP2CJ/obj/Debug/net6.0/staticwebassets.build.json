@@ -1,34 +1,11 @@
 {
   "Version": 1,
-  "Hash": "Et+UgUz+ar5miB0T7oLMXwEnu+34sEKiTpGrXyVyyvs=",
+  "Hash": "Gmf2j5h6JkFPg23ie9SsAPHJwde0f52ruCzbhSNBAPE=",
   "Source": "SP2CJ",
   "BasePath": "_content/SP2CJ",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [
-    {
-      "Identity": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\FSService\\FSService.fsproj",
-      "Version": 2,
-      "Source": "FSService",
-      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
-      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
-    },
-    {
-      "Identity": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\Models\\Models.csproj",
-      "Version": 2,
-      "Source": "Models",
-      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
-      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
-    }
-  ],
+  "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
       "Name": "SP2CJ\\wwwroot",

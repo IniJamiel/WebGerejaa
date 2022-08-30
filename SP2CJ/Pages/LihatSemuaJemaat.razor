@@ -1,7 +1,6 @@
 ﻿@page "/editJemaat"
 @using SP2CJ.Services
 @using Microsoft.AspNetCore.Components
-@using Models
 <h3>Edit Dan Lihat Semua Jemaat</h3>
 @if (@EditorVisible)
 {
@@ -181,6 +180,7 @@
     int tableLimit = 50;
     static string All = "All";
     public List<RefRole> GridSelect = new List<RefRole>();
+    FSMerged fs = new FSMerged();
 
     Dictionary<string, object> InputAttributes { get; set; } =
         new()
@@ -202,13 +202,13 @@
 
     private void handleInput()
     {
-        FService.editJemaat<Jemaat>(editJemaat);
+        fs.editJemaat(editJemaat);
         EditorVisible = false;
     }
 
     protected override void OnInitialized()
     {
-        Jemaats = FService.ListAllJemaat.Invoke(null).ToList();
+        Jemaats = fs.ListAllJemaat();
         GridSelect = cm.GetRefRoles();
         Filtered = GridSelect;
         ListKlasifikasi = cm.GetRefMaster("PLYAN").ItemList;
@@ -226,7 +226,7 @@
 
     private void Delete(Jemaat kill)
     {
-        FService.DeleteJemaat(kill);
+        fs.DeleteJemaat(kill);
     }
 
 }

@@ -19,14 +19,14 @@
             </DatePicker>
         </div>
     </div>
-    <div class="tile is-ancestor">
-        <div class="tile">
+    <div class="tile block is-ancestor">
+        <div class="tile is-primary">
             @foreach (var jadwal in lihaJadwals)
             {
                 <div class="tile is-child has-text-centered">
                     <h4 class="has-text-weight-semibold block"> @jadwal.tanggal.ToString("dddd, dd MMMM yyyy"): @jadwal.JenisJadwal</h4>
                     <h5 class="has-text-weight-medium block">Tema: @jadwal.Tema</h5>
-                    <div class="container">
+                    
                     @foreach (var playans in jadwal.PelayansJadwal)
                     {
                         <h5 class="has-text-weight-medium is-underlined">@playans.Key</h5>
@@ -35,7 +35,6 @@
                             <p>@playan.Jemaat.FullName, @playan.Role.RoleName</p>
                         }
                     }
-                    </div>
                     </div>
             }
         </div>

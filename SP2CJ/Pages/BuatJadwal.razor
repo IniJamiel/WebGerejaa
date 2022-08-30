@@ -61,13 +61,16 @@
 
                             @foreach (var roleJemaat in @loop.Roles)
                             {
-                                <tr>
-                                    <td>@loop.FullName</td>
-                                    <td>@roleJemaat.RoleName</td>
-                                    <td>
-                                        <button type="button" @onclick="() => addPelayan(role.itemCode,loop,roleJemaat)" class="is-small button is-primary">Pilih</button>
-                                    </td>
-                                </tr>
+                                @if (@roleJemaat.RoleType.itemCode == role.itemCode)
+                                {
+                                    <tr>
+                                        <td>@loop.FullName</td>
+                                        <td>@roleJemaat.RoleName</td>
+                                        <td>
+                                            <button type="button" @onclick="() => addPelayan(role.itemCode, loop, roleJemaat)" class="is-small button is-primary">Pilih</button>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         }
                     </table>

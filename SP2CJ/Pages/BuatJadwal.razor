@@ -34,10 +34,12 @@
             </div>
             @foreach (var role in listRoleType)
             {
-                <div class="control block is-bordered">
+                <div class="control block is-bordered" >
+
                     <label class="ignoreFlex is-justify-content-space-between">
                         @role.itemName:
                     </label>
+                    <input class="input" placeholder="Filter Nama" type="text" @bind="filterDictionary[role.itemCode]" > 
                     <table class="table is-striped is-hoverable">
                         <tr>
                             <th>Nama</th>
@@ -46,31 +48,25 @@
                         </tr>
                         @foreach (var loop in pelayanSelected[role.itemCode])
                         {
-                            
-                                <tr class="is-selected">
-                                    <td>@loop.Jemaat.FullName</td>
-                                    <td>@loop.Role.RoleName</td>
-                                    <td>
-                                        <button @onclick="() => deletePelayan(role.itemCode, loop)" type="button" class="is-small button is-danger">Hapus</button>
-                                    </td>
-                                </tr>
-                            
+                            <tr class="is-selected">
+                                <td>@loop.Jemaat.FullName</td>
+                                <td>@loop.Role.RoleName</td>
+                                <td>
+                                    <button @onclick="() => deletePelayan(role.itemCode, loop)" type="button" class="is-small button is-danger">Hapus</button>
+                                </td>
+                            </tr>
                         }
                         @foreach (var loop in pelayans[role.itemCode])
                         {
-
-                            @foreach (var roleJemaat in @loop.Roles)
+                            @foreach (var roleJemaat in @loop.Roles.Where(roleJemaat => @roleJemaat.RoleType.itemCode == role.itemCode))
                             {
-                                @if (@roleJemaat.RoleType.itemCode == role.itemCode)
-                                {
-                                    <tr>
-                                        <td>@loop.FullName</td>
-                                        <td>@roleJemaat.RoleName</td>
-                                        <td>
-                                            <button type="button" @onclick="() => addPelayan(role.itemCode, loop, roleJemaat)" class="is-small button is-primary">Pilih</button>
-                                        </td>
-                                    </tr>
-                                }
+                                <tr>
+                                    <td>@loop.FullName</td>
+                                    <td>@roleJemaat.RoleName</td>
+                                    <td>
+                                        <button type="button" @onclick="@(() => addPelayan(role.itemCode, loop, roleJemaat))" class="is-small button is-primary">Pilih</button>
+                                    </td>
+                                </tr>
                             }
                         }
                     </table>
@@ -95,11 +91,17 @@
     List<RefMasterItem> listRoleType = new();
     Dictionary<string, List<Jemaat>> pelayans = new();
     Dictionary<string, List<Pelayan>> pelayanSelected = new();
-
+    Dictionary<string, string> filterDictionary = new();
     private void addPelayan(string code, Jemaat jemaat, RefRole role)
     {
         pelayanSelected[code].Add(new Pelayan(role, jemaat, code));
         pelayans[code].Remove(jemaat);
+    }
+
+    private void filter(string code)
+    {
+        var searchString = filterDictionary[code];
+        pelayans[code] = pelayans[code].Where(a => a.FullName.ToUpper().Contains(searchString.ToUpper())).ToList();
     }
 
     private void deletePelayan(string code, Pelayan pelayan)

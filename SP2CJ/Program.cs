@@ -5,7 +5,7 @@ using SP2CJ.Data;
 using Blazorise;
 using Blazorise.Bulma;
 using Blazorise.Icons.FontAwesome;
-using Models;
+using SP2CJ.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

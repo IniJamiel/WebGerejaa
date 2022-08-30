@@ -6,8 +6,6 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Microsoft.FSharp.Collections;
 using Microsoft.VisualBasic;
-using Models;
-
 
 namespace SP2CJ.Services;
 
@@ -127,7 +125,8 @@ public class CrudMongo
     public Dictionary<string, List<Jemaat>> pelayansSorted(DateTime tanggal)
     {
         Dictionary<string, List<Jemaat>> returned = new();
-        var listRoleType = FService.GetRefMasterItems("PLYAN").Invoke(CancellationToken.None).ItemList;
+        FSMerged fs = new FSMerged();
+        var listRoleType = fs.GetRefMasterItems("PLYAN").ItemList;
 
         var Pelayans = GetAvailable(tanggal);
 

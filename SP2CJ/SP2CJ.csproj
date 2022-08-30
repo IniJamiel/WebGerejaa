@@ -25,8 +25,4 @@
 		<PackageReference Include="Twilio" Version="5.78.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\FSService\FSService.fsproj" />
-	</ItemGroup>
-
-</Project>
+		</Project>

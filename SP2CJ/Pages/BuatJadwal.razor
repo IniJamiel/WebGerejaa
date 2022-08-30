@@ -1,5 +1,4 @@
 ﻿@page "/BuatJadwal"
-@using Models
 @using SP2CJ.Services
 @using Microsoft.AspNetCore.Mvc.ApiExplorer
 
@@ -108,8 +107,9 @@
 
     protected override void OnInitialized()
     {
-        listIbadah = FService.GetRefMasterItems("IBDH").Invoke(CancellationToken.None).ItemList;
-        listRoleType = FService.GetRefMasterItems("PLYAN").Invoke(CancellationToken.None).ItemList;
+        FSMerged fs = new FSMerged();
+        listIbadah = fs.GetRefMasterItems("IBDH").ItemList;
+        listRoleType = fs.GetRefMasterItems("PLYAN").ItemList;
         var now = DateTime.Now;
         foreach (var a in listRoleType)
         {

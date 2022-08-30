@@ -564,15 +564,6 @@
           }
         }
       },
-      "MongoDB.FSharp/0.1.0": {
-        "type": "package",
-        "compile": {
-          "lib/net40/MongoDB.FSharp.dll": {}
-        },
-        "runtime": {
-          "lib/net40/MongoDB.FSharp.dll": {}
-        }
-      },
       "MongoDB.Libmongocrypt/1.5.5": {
         "type": "package",
         "compile": {
@@ -1024,42 +1015,6 @@
         "runtime": {
           "lib/netstandard2.0/Twilio.dll": {}
         }
-      },
-      "FSService/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "FSharp.Core": "6.0.5",
-          "Models": "1.0.0",
-          "MongoDB.FSharp": "0.1.0"
-        },
-        "compile": {
-          "bin/placeholder/FSService.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/FSService.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
-      },
-      "Models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "FSharp.Core": "6.0.5",
-          "MongoDB.Bson": "2.17.1",
-          "MongoDB.Driver": "2.17.1"
-        },
-        "compile": {
-          "bin/placeholder/Models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Models.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
       }
     }
   },
@@ -1993,20 +1948,6 @@
         "runtimes/win/native/libzstd.dll",
         "runtimes/win/native/snappy32.dll",
         "runtimes/win/native/snappy64.dll"
-      ]
-    },
-    "MongoDB.FSharp/0.1.0": {
-      "sha512": "8M2/CAh9hMYxL5OevWkr0IMmYsXQXI4vqTGitG2flrNvdpxrMI11HO4tWwGRx4O+CLUszzP46I2mPTdcbBc0Gw==",
-      "type": "package",
-      "path": "mongodb.fsharp/0.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net40/MongoDB.FSharp.XML",
-        "lib/net40/MongoDB.FSharp.dll",
-        "lib/net40/MongoDB.FSharp.pdb",
-        "mongodb.fsharp.0.1.0.nupkg.sha512",
-        "mongodb.fsharp.nuspec"
       ]
     },
     "MongoDB.Libmongocrypt/1.5.5": {
@@ -3544,16 +3485,6 @@
         "twilio.5.78.0.nupkg.sha512",
         "twilio.nuspec"
       ]
-    },
-    "FSService/1.0.0": {
-      "type": "project",
-      "path": "../FSService/FSService.fsproj",
-      "msbuildProject": "../FSService/FSService.fsproj"
-    },
-    "Models/1.0.0": {
-      "type": "project",
-      "path": "../Models/Models.csproj",
-      "msbuildProject": "../Models/Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3562,7 +3493,6 @@
       "Blazorise.Components >= 1.0.6",
       "Blazorise.DataGrid >= 1.0.6",
       "Blazorise.Icons.FontAwesome >= 1.0.6",
-      "FSService >= 1.0.0",
       "FSharp.Core >= 6.0.5",
       "Microsoft.JSInterop >= 6.0.7",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.15.1",
@@ -3601,11 +3531,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\FSService\\FSService.fsproj": {
-              "projectPath": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\FSService\\FSService.fsproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -3696,17 +3622,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'MongoDB.FSharp 0.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "MongoDB.FSharp",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  }
 }

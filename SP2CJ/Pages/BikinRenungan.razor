@@ -2,20 +2,20 @@
 @page "/BikinRenungan"
 <h3>BikinRenungan</h3>
 
-<div class="block columns">
-    <div class="container block is-half column is-pulled-left is-vcentered">
+<div class="block container columns">
+    <div class="block is-half column is-pulled-left is-vcentered">
         <EditForm Model="@newRenungan" OnValidSubmit="@HandleInput">
             <div class="control block">
                 <label class=" is-justify-content-space-between">
                     Penulis:
                 </label>
-                <input @bind="newRenungan.Judul" />
+                <input class="input" @bind="newRenungan.penulis" />
             </div>
             <div class="control block">
                 <label class=" is-justify-content-space-between">
                     Judul:
                 </label>
-                <input  @bind="newRenungan.Judul" />
+                <input class="input" @bind="newRenungan.Judul" />
             </div>
             <div class="control block">
                 <label class=" is-justify-content-space-between">
@@ -23,8 +23,13 @@
                 </label>
                 <input  Class="textarea" @bind="newRenungan.Isi" />
             </div>
-            <DatePicker  Date="@newRenungan.Tanggal" >
-            </DatePicker>
+            <div class="control block">
+                <label class=" is-justify-content-space-between">
+                    Tanggal:
+                </label>
+                <DatePicker class="is-quarter" Date="@newRenungan.Tanggal" >
+                </DatePicker>
+            </div>
             <button class="is-pulled-right button">simpan</button>
         </EditForm>
     </div>

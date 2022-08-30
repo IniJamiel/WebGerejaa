@@ -13,25 +13,58 @@
         <li>Login, Register, dan security lainnya</li>
         <li>Sistem Notifikasi jika dapat jadwal</li>
     </ul>
-    <h5>Web ini dirancang dengan prinsip: Bisa digunakan oleh gereja lain.</h5>
-    <div class="card block">
+
+    
+    <div class="card">
         <header class="card-header">
             <p class="card-header-title">
                 Untuk Programmer
             </p>
-            <a href="#collapsible-card" data-action="collapse" class="card-header-icon is-hidden-fullscreen" aria-label="more options">
+            <button class="card-header-icon" aria-label="more options" @onclick="toggleProg">
                 <span class="icon">
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                 </span>
-            </a>
+            </button>
         </header>
-        <div id="collapsible-card" class="is-collapsible is-active">
-            <div class="card-content">
-                <p class="title is-4">
-                    Situs ini dibangun dengan Blazor Server (C#), Bulma CSS, dan MongoDB (saat ini di host di Atlas).
-                </p>
+        <div class="card-content" hidden="@hideCardProg">
+            <div class="content" >
+                Situs ini dibangun dengan Blazor Server (C#), Bulma CSS, dan MongoDB (saat ini di host di Atlas). Server Backend yang bersifat API ditulis dengan .NET F#, namun saat di deploy ke Heroku kebakaran.
             </div>
+        </div>
         
+    </div>
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">
+                Known Bugs
+            </p>
+            <button class="card-header-icon" aria-label="more options" @onclick="toggleBugs">
+                <span class="icon">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+            </button>
+        </header>
+        <div class="card-content" hidden="@hideCardBugs">
+            <div class="content" >
+                <ul>
+                    <li>
+                        Filter Pelayan masih belum jalan
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+
 </div>
+@code{
+    bool hideCardProg = true;
+    bool hideCardBugs = true;
+    void toggleProg()
+    {
+        hideCardProg = !hideCardProg;
+    }
+    void toggleBugs()
+    {
+        hideCardBugs = !hideCardBugs;
+    }
+}

@@ -39,13 +39,15 @@
                     <label class="ignoreFlex is-justify-content-space-between">
                         @role.itemName:
                     </label>
-                    <input class="input" placeholder="Filter Nama" type="text" @bind="filterDictionary[role.itemCode]" > 
+                    <input class="input" @bind:event="oninput" @onkeyup="() => filter(role.itemCode)" placeholder="Isi Nama (Wajib)" type="text" @bind="filterDictionary[role.itemCode]" > 
                     <table class="table is-striped is-hoverable">
+                    @if(pelayansFiltered[role.itemCode].Any() || pelayanSelected[role.itemCode].Any()){
                         <tr>
                             <th>Nama</th>
                             <th>Role</th>
                             <th>Action</th>
                         </tr>
+                    }
                         @foreach (var loop in pelayanSelected[role.itemCode])
                         {
                             <tr class="is-selected">
@@ -56,7 +58,7 @@
                                 </td>
                             </tr>
                         }
-                        @foreach (var loop in pelayans[role.itemCode])
+                        @foreach (var loop in pelayansFiltered[role.itemCode])
                         {
                             @foreach (var roleJemaat in @loop.Roles.Where(roleJemaat => @roleJemaat.RoleType.itemCode == role.itemCode))
                             {
@@ -90,6 +92,7 @@
     List<RefMasterItem> listIbadah = new();
     List<RefMasterItem> listRoleType = new();
     Dictionary<string, List<Jemaat>> pelayans = new();
+    Dictionary<string, List<Jemaat>> pelayansFiltered = new();
     Dictionary<string, List<Pelayan>> pelayanSelected = new();
     Dictionary<string, string> filterDictionary = new();
     private void addPelayan(string code, Jemaat jemaat, RefRole role)
@@ -101,7 +104,7 @@
     private void filter(string code)
     {
         var searchString = filterDictionary[code];
-        pelayans[code] = pelayans[code].Where(a => a.FullName.ToUpper().Contains(searchString.ToUpper())).ToList();
+        pelayansFiltered[code] = searchString != "" ? pelayans[code].Where(a => a.FullName.ToUpper().Contains(searchString.ToUpper())).ToList() : new List<Jemaat>() ;
     }
 
     private void deletePelayan(string code, Pelayan pelayan)
@@ -119,6 +122,8 @@
         foreach (var a in listRoleType)
         {
             pelayanSelected[a.itemCode] = new List<Pelayan>();
+            filterDictionary[a.itemCode] = String.Empty;
+            pelayansFiltered[a.itemCode]= new List<Jemaat>();
         }
         newJadwal.tanggal = now.AddDays(7 - (int) now.DayOfWeek);
         pelayans = cm.pelayansSorted(newJadwal.tanggal);

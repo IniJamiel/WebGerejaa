@@ -13,7 +13,8 @@ namespace SP2CJ.Services
 
         public DeleteResult? DeleteJemaat(Jemaat jemaatDiKill)
         {
-            return Collections.JemaatCollection().DeleteOne(a => a == jemaatDiKill);
+            var filter = Builders<Jemaat>.Filter.Eq((x => x.Id), jemaatDiKill.Id);
+            return Collections.JemaatCollection().DeleteOne(filter);
         }
 
         public Jemaat? editJemaat(Jemaat jemaatEdit)

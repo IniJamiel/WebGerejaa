@@ -28,16 +28,9 @@ D:\webGereja\SP2CJWEB\SP2CJ.web\SP2CJ\build_output\runtimes\win\native\mongocryp
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\SP2CJ.dll
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\refint\SP2CJ.dll
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\SP2CJ.pdb
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\Properties\launchSettings.json
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\appsettings.json
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\FSharp.Core.xml
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\FSService.deps.json
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\FSService.runtimeconfig.json
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\Models.deps.json
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\Models.runtimeconfig.json
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\Models.exe
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\FSService.exe
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\build_output\appsettings.Development.json
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\build_output\appsettings.json
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\build_output\SP2CJ.deps.json
@@ -67,7 +60,6 @@ C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGereja
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\MongoDB.Bson.dll
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\MongoDB.Driver.dll
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\MongoDB.Driver.Core.dll
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\MongoDB.FSharp.dll
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
@@ -100,10 +92,6 @@ C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGereja
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\FSService.dll
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\Models.dll
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\FSService.pdb
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\Models.pdb
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\SP2CJ.csproj.AssemblyReference.cache
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\SP2CJ.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\SP2CJ.AssemblyInfoInputs.cache
@@ -121,7 +109,6 @@ C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGereja
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\SP2CJ.csproj.CopyComplete
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\SP2CJ.genruntimeconfig.cache
 C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\obj\Debug\net6.0\ref\SP2CJ.dll
-C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\bin\Debug\net6.0\.filenesting.json
 D:\webGereja\SP2CJWEB\SP2CJ.web\SP2CJ\obj\Debug\net6.0\SP2CJ.csproj.AssemblyReference.cache
 D:\webGereja\SP2CJWEB\SP2CJ.web\SP2CJ\obj\Debug\net6.0\SP2CJ.GeneratedMSBuildEditorConfig.editorconfig
 D:\webGereja\SP2CJWEB\SP2CJ.web\SP2CJ\obj\Debug\net6.0\SP2CJ.AssemblyInfoInputs.cache

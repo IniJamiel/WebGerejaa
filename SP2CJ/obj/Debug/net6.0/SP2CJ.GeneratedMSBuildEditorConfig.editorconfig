@@ -8,81 +8,81 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SP2CJ
 build_property.RootNamespace = SP2CJ
-build_property.ProjectDir = D:\webGereja\SP2CJWEB\SP2CJ.web\SP2CJ\
+build_property.ProjectDir = C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\webGereja\SP2CJWEB\SP2CJ.web\SP2CJ
+build_property.MSBuildProjectDirectory = C:\Users\isaiah.jamiel\Documents\GitHub\webGodot\dist\webGodot\browser\WebGerejaa\SP2CJ
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/App.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/BacaRenungan.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/BacaRenungan.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmFjYVJlbnVuZ2FuLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/BikinRenungan.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/BikinRenungan.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmlraW5SZW51bmdhbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/BuatJadwal.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/BuatJadwal.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQnVhdEphZHdhbC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/BuatJenisPelayanan.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/BuatJenisPelayanan.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQnVhdEplbmlzUGVsYXlhbmFuLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/Index.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/InsertJemaat.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/InsertJemaat.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5zZXJ0SmVtYWF0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/InsertRole.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/InsertRole.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5zZXJ0Um9sZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/LihatJadwal.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/LihatJadwal.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGloYXRKYWR3YWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/LihatSemuaJemaat.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/LihatSemuaJemaat.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGloYXRTZW11YUplbWFhdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Shared/SurveyPrompt.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Shared/TableTemplate.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Shared/TableTemplate.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFRhYmxlVGVtcGxhdGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/_Imports.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Shared/MainLayout.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-0kxr5vm2m4
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Shared/NavMenu.razor]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-awoekzn4cr
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/Error.cshtml]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/_Host.cshtml]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/_Layout.cshtml]
+[C:/Users/isaiah.jamiel/Documents/GitHub/webGodot/dist/webGodot/browser/WebGerejaa/SP2CJ/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

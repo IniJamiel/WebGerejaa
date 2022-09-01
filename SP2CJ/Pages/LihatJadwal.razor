@@ -1,4 +1,4 @@
-﻿@page "/LihatJadwal"
+@page "/LihatJadwal"
 @using SP2CJ.Services
 
 
@@ -15,7 +15,7 @@
             <label class=" is-justify-content-space-between">
                 Tanggal akhir:
             </label>
-            <DatePicker TValue="DateTime" DateChanged="@Datechangedevent" Date="@Range2">
+            <DatePicker TValue="DateTime" DateChanged="@Datechangedevent2" Date="@Range2">
             </DatePicker>
         </div>
     </div>
@@ -44,18 +44,24 @@
 
 @code {
     List<Jadwal> lihaJadwals = new List<Jadwal>();
-    DateTime Range1 = DateTime.Now;
-    DateTime Range2 = DateTime.Now.AddDays(14);
+    DateTime Range1;
+    DateTime Range2;
     CrudMongo cm = new CrudMongo();
     protected override void OnInitialized()
     {
-        base.OnInitialized();
         lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
-
+        Range1 = DateTime.Now;
+        Range2 = DateTime.Now.AddDays(14);
     }
 
-    void Datechangedevent()
+    void Datechangedevent(DateTime date)
     {
-        lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+      Range1 = date;
+      lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+    }
+    void Datechangedevent2(DateTime date)
+    {
+      Range2 = date;
+      lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
     }
 }

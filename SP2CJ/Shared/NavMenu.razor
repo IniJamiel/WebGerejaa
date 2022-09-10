@@ -1,12 +1,13 @@
-﻿@using Twilio.Rest.Api.V2010.Account.Usage.Record
-<div class="top-row is-vcentered columns is-mobile">
-    <div class="column container" ><a class="title" style="color: aquamarine" href="" ><h2>SP2CJ</h2></a></div>
-    <div class="column is-pulled-right m-auto is-clickable is-clipped">
-        <i class="fas fa-bars " @onclick="ToggleNavMenu" hidden="@(!collapseNavMenu)" style="color: aquamarine"></i>
-    </div>
-    
-        
+﻿
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
 
+
+<div class="is-vcentered top-row columns m-0 p-0 is-mobile">
+    <div class="column container" ><a class="title" style="color: aquamarine" href="" ><h2>SP2CJ</h2></a></div>
+    <div class="column is-pulled-right m-auto p-0 is-clickable is-clipped" @onclick="ToggleNavMenu">
+        <i class="fas fa-bars is-pulled-right mr-3" hidden="@(!collapseNavMenu)" style="color: aquamarine"></i>
+    </div>
 </div>
 
 
@@ -61,10 +62,9 @@
 </div>
 
 @code {
-    private bool collapseNavMenu = true;
+    private bool collapseNavMenu = false;
     ElementReference Menu;
     //private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;

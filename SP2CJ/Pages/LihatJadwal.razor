@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="block table-container">
-        <table class="table ">
+        <table class="table  is-striped is-narrow is-hoverable is-fullwidth">
             <tr>
                 @for (int i = -1; i < lihaJadwals.Count(); i++)
                 {
@@ -44,11 +44,11 @@
                             {
                                 @if (b == 0)
                                 {
-                                    <td>@key</td>
+                                    <th>@key</th>
                                 }
                                 else
                                 {
-                                    <td></td>
+                                    <th></th>
                                 }
                             }
                             else

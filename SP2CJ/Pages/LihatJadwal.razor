@@ -2,6 +2,7 @@
 @using SP2CJ.Services
 
 
+
 <div class="container block">
     <div class="block columns">
         <div class="column control">
@@ -19,49 +20,98 @@
             </DatePicker>
         </div>
     </div>
-    <div class="tile block is-ancestor">
-        <div class="tile is-primary">
-            @foreach (var jadwal in lihaJadwals)
-            {
-                <div class="tile is-child has-text-centered">
-                    <h4 class="has-text-weight-semibold block"> @jadwal.tanggal.ToString("dddd, dd MMMM yyyy"): @jadwal.JenisJadwal</h4>
-                    <h5 class="has-text-weight-medium block">Tema: @jadwal.Tema</h5>
-                    
-                    @foreach (var playans in jadwal.PelayansJadwal)
+    <div class="block table-container">
+        <table class="table ">
+            <tr>
+                @for (int i = -1; i < lihaJadwals.Count(); i++)
+                {
+                    @if (i == -1)
                     {
-                        <h5 class="has-text-weight-medium is-underlined">@playans.Key</h5>
-                        @foreach (var playan in @playans.Value)
-                        {
-                            <p>@playan.Jemaat.FullName, @playan.Role.RoleName</p>
-                        }
+                        <th>Tanggal</th>
                     }
-                    </div>
+                    else
+                    {<th>@lihaJadwals[i].tanggal.ToString("dddd, dd MMMM yyyy"): @lihaJadwals[i].JenisJadwal</th>}
+                }
+            </tr >
+            @foreach (string key in maxDict.Keys)
+            {
+                @for (int b = 0; b < maxDict[key]; b++)
+                {
+                    <tr>
+                        @for (int i = -1; i < lihaJadwals.Count(); i++)
+                        {
+                            @if (i == -1 && b == 0)
+                            {
+                                @if (b == 0)
+                                {
+                                    <td>@key</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                            else
+                            {
+                                <td>
+                                    @{
+                                        string namaPelayan = string.Empty;
+                                        try
+                                        {
+                                            namaPelayan = lihaJadwals[i].PelayansJadwal[key][b].Jemaat.FullName + ", " + lihaJadwals[i].PelayansJadwal[key][b].Role.RoleName;
+                                        }
+                                        catch
+                                        {
+                                        }
+                                    }
+                                    @namaPelayan</td>
+                            }
+                        }
+                    </tr>
+                }
             }
-        </div>
+
+        </table>
     </div>
 </div>
-
 
 @code {
     List<Jadwal> lihaJadwals = new List<Jadwal>();
     DateTime Range1;
     DateTime Range2;
     CrudMongo cm = new CrudMongo();
+    Dictionary<string, int> maxDict = new();
     protected override void OnInitialized()
     {
         lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
         Range1 = DateTime.Now;
         Range2 = DateTime.Now.AddDays(14);
+        maxDict = getMax(lihaJadwals);
+
     }
 
     void Datechangedevent(DateTime date)
     {
-      Range1 = date;
-      lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+        Range1 = date;
+        lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+        maxDict = getMax(lihaJadwals);
     }
     void Datechangedevent2(DateTime date)
     {
-      Range2 = date;
-      lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+        Range2 = date;
+        lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+        maxDict = getMax(lihaJadwals);
     }
+
+    Dictionary<string, int> getMax(List<Jadwal> jadwal)
+    {
+        Dictionary<string, int> returned = new();
+        foreach (string key in jadwal.SelectMany(a => a.PelayansJadwal.Keys))
+        {
+            returned[key] = jadwal.Select(a => a.PelayansJadwal[key].Count).Max();
+        }
+        return returned;
+    }
+
+
 }

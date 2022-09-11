@@ -2,3 +2,13 @@
 *.vsidx
 
 .fake
+
+/.idea
+
+/.vs
+
+/.vscpde
+
+/.
+
+/SP2CJ/obj/Debug

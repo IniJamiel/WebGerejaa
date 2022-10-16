@@ -12,6 +12,8 @@
                     <SelectItem Value="@item">@item</SelectItem>
                 }
             </Select>
+        </div>
+        <div class="column control">
             <Select TValue="String" Class="select is-flex is-full is-vcentered" SelectedValue="JenisJadwal" SelectedValueChanged="@OnSelectedValueChangedJenis">
                 @foreach (var item in jenisJadwals)
                 {

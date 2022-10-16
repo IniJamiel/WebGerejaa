@@ -81,7 +81,9 @@ main[b-0kxr5vm2m4] {
 .navbar-brand[b-awoekzn4cr] {
     font-size: 1.1rem;
 }
-
+*[b-awoekzn4cr] {
+    z-index: 1000;
+}
 .oi[b-awoekzn4cr] {
     width: 2rem;
     font-size: 1.1rem;

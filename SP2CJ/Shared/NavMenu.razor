@@ -1,18 +1,30 @@
-﻿
-@using Microsoft.AspNetCore.Http
+﻿@using Microsoft.AspNetCore.Http
+@using System.Security.Cryptography
+@using System.ComponentModel.Design
 @inject IHttpContextAccessor httpContextAccessor
+@inject NavigationManager NavManager
 
 
 <div class="is-vcentered top-row columns m-0 p-0 is-mobile">
-    <div class="column container" ><a class="title" style="color: aquamarine" href="" ><h2>SP2CJ</h2></a></div>
+    <div class="column container"><a class="title" style="color: aquamarine" href=""><h2>SP2CJ</h2></a></div>
     <div class="column is-pulled-right m-auto p-0 is-clickable is-clipped" @onclick="ToggleNavMenu">
         <i class="fas fa-bars is-pulled-right mr-3" hidden="@(!collapseNavMenu)" style="color: aquamarine"></i>
     </div>
 </div>
+@if(!isLoggedIn){
 
+<div class="control block">
+    <label style="color:whitesmoke" class="ignoreFlex is-justify-content-space-between">
+        Password:
+    </label>
+    <input @attributes="InputAttributes" @bind="password" placeholder="Luwak White Coffee" />
+    <button class="button is-primary is-pulled-right" @onclick="Login">Login</button>
+</div>
+}
 
-<div class="" id="Menu" hidden="@(!collapseNavMenu)" @ref="Menu" >
-    <nav class="menu" >
+<div class="" id="Menu" hidden="@(!collapseNavMenu)" @ref="Menu">
+    
+    <nav class="menu">
         <div class="nav-item  menu-label">
             <NavLink class="nav-link px-3" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
@@ -20,7 +32,7 @@
         </div>
         <div class="nav-item menu-label">
             <NavLink class="nav-link  px-3" href="insertJemaat">
-                <span class="oi" aria-hidden="true" ><i class="fa-solid fa-person-circle-plus"></i> </span> Tambah Jemaat
+                <span class="oi" aria-hidden="true"><i class="fa-solid fa-person-circle-plus"></i> </span> Tambah Jemaat
             </NavLink>
         </div>
         <div class="nav-item menu-label">
@@ -28,7 +40,7 @@
                 <span class="oi " aria-hidden="true"><i class="fa-solid fa-people-group"></i> </span> Edit/Lihat Jemaat
             </NavLink>
         </div>
-        <div class= "nav-item  menu-label">
+        <div class="nav-item  menu-label">
             <NavLink class="nav-link px-3" href="/BuatJadwal">
                 <span class="oi" aria-hidden="true"> <i class="fa-solid fa-calendar"></i></span> Buat Jadwal
             </NavLink>
@@ -64,10 +76,52 @@
 @code {
     private bool collapseNavMenu = false;
     ElementReference Menu;
+    private bool isLoggedIn = false;
     //private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    public string password = "";
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        string redirect = "/LihatJadwal/" + DateTime.Now.Month.ToString();
+        NavManager.NavigateTo("LihatJadwal");
+        base.OnAfterRender(firstRender);
+    }
+
     private void ToggleNavMenu()
     {
-        collapseNavMenu = !collapseNavMenu;
-       
+        if (isLoggedIn)
+        {
+            collapseNavMenu = !collapseNavMenu;
+        }
+        else
+        {
+            modalactive = activeModal;
+        }
     }
+    Dictionary<string, object> InputAttributes { get; set; } =
+        new()
+        {
+            { "class", "input" }
+        };
+
+
+    string modalactive = "";
+    readonly static string activeModal = "is-active";
+        private Task Login()
+        {
+            if (password == "KopiNikmatGakBikinKembung")
+            {
+                isLoggedIn = true;
+                collapseNavMenu = true;
+            }
+            return Task.CompletedTask;
+
+        }
+
 }
+
+
+
+
+

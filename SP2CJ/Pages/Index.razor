@@ -1,8 +1,9 @@
 ﻿@page "/"
+@inject NavigationManager NavManager
 
 <PageTitle>Index</PageTitle>
 
-<div class="container block" >
+<div class="container block">
     <h1>Masih dalam Pembuatan</h1>
 
     <h4>Fitur yang bisa digunakan: Jadwal dan Renungan</h4>
@@ -14,51 +15,53 @@
         <li>Sistem Notifikasi jika dapat jadwal</li>
     </ul>
 
-    
-    <div class="card">
-        <header class="card-header">
-            <p class="card-header-title">
-                Untuk Programmer
-            </p>
-            <button class="card-header-icon" aria-label="more options" @onclick="toggleProg">
-                <span class="icon">
-                    <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-            </button>
-        </header>
-        <div class="card-content" hidden="@hideCardProg">
-            <div class="content" >
-                Situs ini dibangun dengan Blazor Server (C#), Bulma CSS, dan MongoDB (saat ini di host di Atlas). Server Backend yang bersifat API ditulis dengan .NET F#, namun saat di deploy ke Heroku kebakaran. Jadi, kalo ada yang ngerti tolong bantu awkwk.
-            </div>
-        </div>
-        
+
+    @*<div class="card">
+    <header class="card-header">
+    <p class="card-header-title">
+    Untuk Programmer
+    </p>
+    <button class="card-header-icon" aria-label="more options" @onclick="toggleProg">
+    <span class="icon">
+    <i class="fas fa-angle-down" aria-hidden="true"></i>
+    </span>
+    </button>
+    </header>
+    <div class="card-content" hidden="@hideCardProg">
+    <div class="content" >
+    Situs ini dibangun dengan Blazor Server (C#), Bulma CSS, dan MongoDB (saat ini di host di Atlas). Server Backend yang bersifat API ditulis dengan .NET F#, namun saat di deploy ke Heroku kebakaran. Jadi, kalo ada yang ngerti tolong bantu awkwk.
     </div>
-    <div class="card">
-        <header class="card-header">
-            <p class="card-header-title">
-                Known Bugs
-            </p>
-            <button class="card-header-icon" aria-label="more options" @onclick="toggleBugs">
-                <span class="icon">
-                    <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-            </button>
-        </header>
-        <div class="card-content" hidden="@hideCardBugs">
-            <div class="content" >
-                <ul>
-                    <li>
-                        Filter Pelayan masih belum jalan
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div>
 
+    </div>*@
+    @*<div class="card">
+    <header class="card-header">
+    <p class="card-header-title">
+    Known Bugs
+    </p>
+    <button class="card-header-icon" aria-label="more options" @onclick="toggleBugs">
+    <span class="icon">
+    <i class="fas fa-angle-down" aria-hidden="true"></i>
+    </span>
+    </button>
+    </header>
+    <div class="card-content" hidden="@hideCardBugs">
+    <div class="content" >
+    <ul>
+    <li>
+    Filter Pelayan masih belum jalan
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>*@
+
 </div>
-@code{
+@code {
     bool hideCardProg = true;
     bool hideCardBugs = true;
+
+
     void toggleProg()
     {
         hideCardProg = !hideCardProg;

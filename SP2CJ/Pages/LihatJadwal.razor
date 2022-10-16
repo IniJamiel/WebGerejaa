@@ -5,20 +5,26 @@
 
 <div class="container block">
     <div class="block columns">
-        <div class="column control">
-            <label class=" is-justify-content-space-between">
-                Tanggal awal:
-            </label>
-            <DatePicker TValue="DateTime" DateChanged="@Datechangedevent" Date="@Range1">
-            </DatePicker>
+        <Select TValue="String" Class="select is-flex is-full is-vcentered" SelectedValue="selectedBulan" SelectedValueChanged="@OnSelectedValueChanged">
+            @foreach (var item in ListBulan)
+            {
+                <SelectItem Value="@item">@item</SelectItem>
+            }
+        </Select>
+        @* <div class="column control">
+        <label class=" is-justify-content-space-between">
+        Tanggal awal:
+        </label>
+        <DatePicker TValue="DateTime" DateChanged="@Datechangedevent" Date="@Range1">
+        </DatePicker>
         </div>
         <div class="column control">
-            <label class=" is-justify-content-space-between">
-                Tanggal akhir:
-            </label>
-            <DatePicker TValue="DateTime" DateChanged="@Datechangedevent2" Date="@Range2">
-            </DatePicker>
-        </div>
+        <label class=" is-justify-content-space-between">
+        Tanggal akhir:
+        </label>
+        <DatePicker TValue="DateTime" DateChanged="@Datechangedevent2" Date="@Range2">
+        </DatePicker>
+        </div>*@
     </div>
     <div class="block table-container">
         <table class="table is-striped is-narrow is-hoverable is-fullwidth">
@@ -30,9 +36,11 @@
                         <th>Tanggal</th>
                     }
                     else
-                    {<th>@lihaJadwals[i].tanggal.ToString("dddd, dd MMMM yyyy"): @lihaJadwals[i].JenisJadwal</th>}
+                    {
+                        <th>@lihaJadwals[i].tanggal.ToString("dddd, dd MMMM yyyy"): @lihaJadwals[i].JenisJadwal</th>
+                    }
                 }
-            </tr >
+            </tr>
             @foreach (string key in maxDict.Keys)
             {
                 @for (int b = 0; b < maxDict[key]; b++)
@@ -44,7 +52,7 @@
                             {
                                 @if (b == 0)
                                 {
-                                    <th>@key</th>
+                                    <th>@listRefRole.FirstOrDefault(a => a.RoleCode == key)!.RoleName</th>
                                 }
                                 else
                                 {
@@ -58,13 +66,14 @@
                                         string namaPelayan = string.Empty;
                                         try
                                         {
-                                            namaPelayan = lihaJadwals[i].PelayansJadwal[key][b].Jemaat.FullName + ", " + lihaJadwals[i].PelayansJadwal[key][b].Role.RoleName;
+                                            namaPelayan = lihaJadwals[i].PelayansJadwal[key][b].Jemaat.FullName;
                                         }
                                         catch
                                         {
                                         }
                                     }
-                                    @namaPelayan</td>
+                                    @namaPelayan
+                                </td>
                             }
                         }
                     </tr>
@@ -80,27 +89,32 @@
     DateTime Range2;
     CrudMongo cm = new CrudMongo();
     Dictionary<string, int> maxDict = new();
+    List<string> ListBulan;
+    string selectedBulan;
+    List<RefRole> listRefRole;
+
     protected override void OnInitialized()
     {
         lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
         Range1 = DateTime.Now;
         Range2 = DateTime.Now.AddDays(14);
         maxDict = getMax(lihaJadwals);
-
+        ListBulan = cm.MonthList;
+        listRefRole = cm.GetRefRoles();
     }
 
-    void Datechangedevent(DateTime date)
-    {
-        Range1 = date;
-        lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
-        maxDict = getMax(lihaJadwals);
-    }
-    void Datechangedevent2(DateTime date)
-    {
-        Range2 = date;
-        lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
-        maxDict = getMax(lihaJadwals);
-    }
+    //void Datechangedevent(DateTime date)
+    //{
+    //    Range1 = date;
+    //    lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+    //    maxDict = getMax(lihaJadwals);
+    //}
+    //void Datechangedevent2(DateTime date)
+    //{
+    //    Range2 = date;
+    //    lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
+    //    maxDict = getMax(lihaJadwals);
+    //}
 
     Dictionary<string, int> getMax(List<Jadwal> jadwal)
     {
@@ -110,6 +124,15 @@
             returned[key] = jadwal.Select(a => a.PelayansJadwal[key].Count).Max();
         }
         return returned;
+    }
+    Task OnSelectedValueChanged(string value)
+    {
+        selectedBulan = value;
+
+        lihaJadwals = cm.GetJadwalsByBulan(selectedBulan).OrderBy(a => a.tanggal).ToList();
+        maxDict = getMax(lihaJadwals);
+
+        return Task.CompletedTask;
     }
 
 

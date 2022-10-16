@@ -6,6 +6,9 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Microsoft.FSharp.Collections;
 using Microsoft.VisualBasic;
+using System.Collections.Generic;
+using System.Globalization;
+using System;
 
 namespace SP2CJ.Services;
 
@@ -126,15 +129,15 @@ public class CrudMongo
     {
         Dictionary<string, List<Jemaat>> returned = new();
         FSMerged fs = new FSMerged();
-        var listRoleType = fs.GetRefMasterItems("PLYAN").ItemList;
+        var listRoleType = GetRefRoles();
 
         var Pelayans = GetAvailable(tanggal);
 
         for (int a = 0; a < listRoleType.Count(); a++)
         {
-            var roleType = listRoleType[a].itemCode;
+            var roleType = listRoleType[a].RoleCode;
             if (roleType != null)
-                returned[roleType] = Pelayans.Where(alinq => alinq.Roles.Any(x => x.RoleType.itemCode == roleType)).ToList();
+                returned[roleType] = Pelayans.Where(alinq => alinq.Roles.Any(x => x.RoleCode == roleType)).ToList();
         }
         return returned;
     }
@@ -158,6 +161,23 @@ public class CrudMongo
         return Collections.JadwalCollection().Find(a => a.tanggal >= min && a.tanggal <= max).ToList();
     }
 
+    public Jadwal getJadwalHariAndJenis(DateTime date, string jenis)
+    {
+        return Collections.JadwalCollection().Find(a => a.tanggal ==date).FirstOrDefault();
+
+    }
+
+    public List<Jadwal> GetJadwalsByBulan(string bulan)
+    {
+        int MonthDigit = DateTime.ParseExact(bulan, "MMMM", CultureInfo.InvariantCulture).Month;
+
+        var firstDayOfMonth = new DateTime(DateTime.Now.Year, MonthDigit, 1);
+        var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+
+        return Collections.JadwalCollection().Find(a => a.tanggal >= firstDayOfMonth && a.tanggal <= lastDayOfMonth).ToList();
+    }
+
     public void InputRenungan(Renungan renung)
     {
         renung.Tanggal = renung.Tanggal.ToUniversalTime().Date;
@@ -169,4 +189,27 @@ public class CrudMongo
     {
         return Collections.RenunganCollection().Find(a => a.Tanggal == DateTime.Now.ToUniversalTime().Date).ToList();
     }
+
+    public void FoldPemusik()
+    {
+        List<String> foldList = new List<String>() { "DRUM", "GTRS", "BASS", "KEYB" };
+        var ListALl = JemaatCollection().Find(a => true).ToList();
+        var filtered = ListALl.FindAll(a => a.Roles.Select(dalem => dalem.RoleCode).ToList().Intersect(foldList).Any());
+
+
+        RefRole pmsk = RefRoleCollection().Find(a => a.RoleCode == "PMSK").FirstOrDefault();
+
+        foreach (var jemaat in filtered)
+        {
+            jemaat.Roles.Add(pmsk);
+            jemaat.Roles.RemoveAll(a => foldList.Contains(a.RoleCode));
+            FSMerged fs = new FSMerged();
+            fs.editJemaat(jemaat);
+        }
+
+    }
+
+    public List<string> MonthList = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.ToList();
+
+
 }

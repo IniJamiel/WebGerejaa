@@ -1,6 +1,5 @@
 ﻿@page "/BuatJadwal"
 @using SP2CJ.Services
-@using Microsoft.AspNetCore.Mvc.ApiExplorer
 
 <PageTitle>Buat Jadwal</PageTitle>
 <h1>Buat Jadwal</h1>
@@ -12,14 +11,14 @@
                 <label class=" is-justify-content-space-between">
                     Tanggal:
                 </label>
-                <DatePicker TValue="DateTime" DateChanged="@Datechangedevent" Date="@newJadwal.tanggal" >
+                <DatePicker TValue="DateTime" DateChanged="@Datechangedevent" Date="@newJadwal.tanggal">
                 </DatePicker>
             </div>
             <div class="control block">
                 <label class="ignoreFlex is-justify-content-space-between">
                     Jenis Ibadah:
                 </label>
-                <Select @bind-SelectedValue="@newJadwal.JenisJadwal">
+                <Select TValue="string" SelectedValue="@jenis" SelectedValueChanged="@OnSelectedValueChanged">
                     @foreach (var list in listIbadah)
                     {
                         <SelectItem Value="list.itemName">@list.itemName</SelectItem>
@@ -30,50 +29,53 @@
                 <label class="ignoreFlex is-justify-content-space-between">
                     Tema:
                 </label>
-                <InputText @attributes="InputAttributes" @bind-Value="@newJadwal.Tema"/>
+                <InputText @attributes="InputAttributes" @bind-Value="@newJadwal.Tema" />
             </div>
             @foreach (var role in listRoleType)
             {
-                <div class="control block is-bordered" >
+                @if (pelayans[role.RoleCode].Any())
+                {
+                    <div class="control block is-bordered">
 
-                    <label class="ignoreFlex is-justify-content-space-between">
-                        @role.itemName:
-                    </label>
-                    <input class="input" @bind:event="oninput" @onkeyup="() => filter(role.itemCode)" placeholder="Isi Nama (Wajib)" type="text" @bind="filterDictionary[role.itemCode]" > 
-                    <table class="table is-striped is-hoverable">
-                    @if(pelayansFiltered[role.itemCode].Any() || pelayanSelected[role.itemCode].Any()){
-                        <tr>
-                            <th>Nama</th>
-                            <th>Role</th>
-                            <th>Action</th>
-                        </tr>
-                    }
-                        @foreach (var loop in pelayanSelected[role.itemCode])
-                        {
-                            <tr class="is-selected">
-                                <td>@loop.Jemaat.FullName</td>
-                                <td>@loop.Role.RoleName</td>
-                                <td>
-                                    <button @onclick="() => deletePelayan(role.itemCode, loop)" type="button" class="is-small button is-danger">Hapus</button>
-                                </td>
-                            </tr>
-                        }
-                        @foreach (var loop in pelayansFiltered[role.itemCode])
-                        {
-                            @foreach (var roleJemaat in @loop.Roles.Where(roleJemaat => @roleJemaat.RoleType.itemCode == role.itemCode))
+                        <label class="ignoreFlex is-justify-content-space-between">
+                            @role.RoleName:
+                        </label>
+                        <input class="input" @bind:event="oninput" @onkeyup="() => filter(role.RoleCode)" placeholder="Isi Nama (Wajib)" type="text" @bind="filterDictionary[role.RoleCode]">
+                        <table class="table is-striped is-hoverable">
+                            @if (pelayansFiltered[role.RoleCode].Any() || pelayanSelected[role.RoleCode].Any())
                             {
                                 <tr>
-                                    <td>@loop.FullName</td>
-                                    <td>@roleJemaat.RoleName</td>
+                                    <th>Nama</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
+                                </tr>
+                            }
+                            @foreach (var loop in pelayanSelected[role.RoleCode])
+                            {
+                                <tr class="is-selected">
+                                    <td>@loop.Jemaat.FullName</td>
+                                    <td>@loop.Role.RoleName</td>
                                     <td>
-                                        <button type="button" @onclick="@(() => addPelayan(role.itemCode, loop, roleJemaat))" class="is-small button is-primary">Pilih</button>
+                                        <button @onclick="() => deletePelayan(role.RoleCode, loop)" type="button" class="is-small button is-danger">Hapus</button>
                                     </td>
                                 </tr>
                             }
-                        }
-                    </table>
-                </div>
-            }
+                            @foreach (var loop in pelayansFiltered[role.RoleCode])
+                            {
+                                @foreach (var roleJemaat in @loop.Roles.Where(roleJemaat => @roleJemaat.RoleCode == role.RoleCode))
+                                {
+                                    <tr>
+                                        <td>@loop.FullName</td>
+                                        <td>@roleJemaat.RoleName</td>
+                                        <td>
+                                            <button type="button" @onclick="@(() => addPelayan(role.RoleCode, loop, roleJemaat))" class="is-small button is-primary">Pilih</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    </div>
+                }   }
             <tr>
                 <div class="block">
                     <button type="submit" class="is-pulled-right button is-success">Simpan</button>
@@ -90,44 +92,48 @@
     CrudMongo cm = new CrudMongo();
     Jadwal newJadwal = new();
     List<RefMasterItem> listIbadah = new();
-    List<RefMasterItem> listRoleType = new();
+    List<RefRole> listRoleType = new();
     Dictionary<string, List<Jemaat>> pelayans = new();
     Dictionary<string, List<Jemaat>> pelayansFiltered = new();
     Dictionary<string, List<Pelayan>> pelayanSelected = new();
     Dictionary<string, string> filterDictionary = new();
+    string jenis;
     private void addPelayan(string code, Jemaat jemaat, RefRole role)
     {
         pelayanSelected[code].Add(new Pelayan(role, jemaat, code));
-        pelayans[code].Remove(jemaat);
+        var a = pelayans[code].RemoveAll(a => a.Id == jemaat.Id);
+        filter(code);
     }
 
     private void filter(string code)
     {
         var searchString = filterDictionary[code];
-        pelayansFiltered[code] = searchString != "" ? pelayans[code].Where(a => a.FullName.ToUpper().Contains(searchString.ToUpper())).ToList() : new List<Jemaat>() ;
+        pelayansFiltered[code] = searchString != "" ? pelayans[code].Where(a => a.FullName.ToUpper().Contains(searchString.ToUpper())).OrderBy(jemaat => jemaat.Name).ToList() : new List<Jemaat>();
     }
 
     private void deletePelayan(string code, Pelayan pelayan)
     {
         pelayanSelected[code].Remove(pelayan);
         pelayans[code].Add(pelayan.Jemaat);
+        filter(code);
     }
 
     protected override void OnInitialized()
     {
         FSMerged fs = new FSMerged();
         listIbadah = fs.GetRefMasterItems("IBDH").ItemList;
-        listRoleType = fs.GetRefMasterItems("PLYAN").ItemList;
+        listRoleType = cm.GetRefRoles();
         var now = DateTime.Now;
         foreach (var a in listRoleType)
         {
-            pelayanSelected[a.itemCode] = new List<Pelayan>();
-            filterDictionary[a.itemCode] = String.Empty;
-            pelayansFiltered[a.itemCode]= new List<Jemaat>();
+            pelayanSelected[a.RoleCode] = new List<Pelayan>();
+            filterDictionary[a.RoleCode] = String.Empty;
+            pelayansFiltered[a.RoleCode] = new List<Jemaat>();
         }
-        newJadwal.tanggal = now.AddDays(7 - (int) now.DayOfWeek);
+        newJadwal.tanggal = now.AddDays(7 - (int)now.DayOfWeek);
         pelayans = cm.pelayansSorted(newJadwal.tanggal);
-        newJadwal.JenisJadwal = listIbadah[0].itemName;
+        jenis = listIbadah[0].itemName;
+        newJadwal.JenisJadwal = jenis;
     }
 
     private void HandleInput()
@@ -140,18 +146,41 @@
     }
     Dictionary<string, object> InputAttributes { get; set; } =
         new()
-        {
+                                                                                        {
             { "class", "input" }
-        };
+                                                                                        };
 
     void Datechangedevent(DateTime date)
     {
+
         pelayans = cm.pelayansSorted(newJadwal.tanggal);
-        newJadwal = new();
-        newJadwal.tanggal = date;
+
+        newJadwal = cm.getJadwalHariAndJenis(date,jenis);
+        if (newJadwal != null) return;
+        newJadwal = new Jadwal
+            {
+                tanggal = date
+            };
         foreach (var a in listRoleType)
         {
-            pelayanSelected[a.itemCode] = new List<Pelayan>();
+            pelayanSelected[a.RoleCode] = new List<Pelayan>();
         }
     }
+
+    Task OnSelectedValueChanged(string value)
+    {
+        var saveJadwal = newJadwal;
+        jenis = value;
+        newJadwal.JenisJadwal = value;
+        newJadwal = cm.getJadwalHariAndJenis(newJadwal.tanggal, jenis);
+
+
+        if (newJadwal != null) return Task.CompletedTask;
+        newJadwal = saveJadwal;
+
+
+        return Task.CompletedTask;
+
+    }
+
 }

@@ -9,6 +9,8 @@ using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using System.Globalization;
 using System;
+using System.Diagnostics.Eventing.Reader;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SP2CJ.Services;
 
@@ -80,7 +82,7 @@ public class CrudMongo
     public List<RefRole> GetRefRoles()
     {
         var collection = RefRoleCollection();
-        var List = collection.Find(a => a.RoleName != null).ToList();
+        var List = collection.Find(a => a.RoleName != null).SortBy( a => a.SortPrio).ToList();
         return List;
     }
 
@@ -156,18 +158,17 @@ public class CrudMongo
         }
     }
 
-    public List<Jadwal> GetJadwals(DateTime min, DateTime max)
-    {
-        return Collections.JadwalCollection().Find(a => a.tanggal >= min && a.tanggal <= max).ToList();
-    }
 
     public Jadwal getJadwalHariAndJenis(DateTime date, string jenis)
     {
-        return Collections.JadwalCollection().Find(a => a.tanggal ==date).FirstOrDefault();
+
+        return Collections.JadwalCollection().Find(a => a.tanggal.Date == date.Date && a.JenisJadwal == jenis).FirstOrDefault();
+
+
 
     }
 
-    public List<Jadwal> GetJadwalsByBulan(string bulan)
+    public List<Jadwal> GetJadwalsByBulan(string bulan, string jenis)
     {
         int MonthDigit = DateTime.ParseExact(bulan, "MMMM", CultureInfo.InvariantCulture).Month;
 
@@ -175,7 +176,8 @@ public class CrudMongo
         var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
 
-        return Collections.JadwalCollection().Find(a => a.tanggal >= firstDayOfMonth && a.tanggal <= lastDayOfMonth).ToList();
+        return jenis == "All" ? Collections.JadwalCollection().Find(a => a.tanggal >= firstDayOfMonth && a.tanggal <= lastDayOfMonth).ToList()
+            : Collections.JadwalCollection().Find(a => (a.tanggal >= firstDayOfMonth && a.tanggal <= lastDayOfMonth) && a.JenisJadwal == jenis).ToList();
     }
 
     public void InputRenungan(Renungan renung)
@@ -211,5 +213,16 @@ public class CrudMongo
 
     public List<string> MonthList = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.ToList();
 
+    //public void addSortPrioAll()
+    //{
+    //    var roles = GetRefRoles();
 
+    //    foreach (var added in roles)
+    //    {
+    //        added.SortPrio = 0;
+    //        var filter = Builders<RefRole>.Filter.Eq((x => x.Id), added.Id);
+    //        Collections.RefRoleCollection().FindOneAndReplace(filter, added);
+    //    }
+
+    //}
 }

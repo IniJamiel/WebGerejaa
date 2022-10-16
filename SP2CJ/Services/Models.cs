@@ -40,6 +40,7 @@ namespace SP2CJ.Services
         [DataType(DataType.PhoneNumber)] public string nomorHandphone { get; set; }
         public string idLine { get; set; }
 
+
     }
 
     public class RefRole
@@ -55,6 +56,8 @@ namespace SP2CJ.Services
         public RefMasterItem RoleType { get; set; } = new RefMasterItem();
 
         public string TypeName => RoleType.itemName;
+
+        public int SortPrio = 1;
     }
 
     public class Jadwal
@@ -156,5 +159,9 @@ namespace SP2CJ.Services
         public string? itemCode { get; set; }
         [Required]
         public string itemName { get; set; }
+
+        public static readonly RefMasterItem AllRefMaster = new() { Id = "ALl", itemCode = "All", itemName = "All" };
+
     }
+
 }

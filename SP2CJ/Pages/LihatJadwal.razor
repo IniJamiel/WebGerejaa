@@ -1,16 +1,24 @@
-@page "/LihatJadwal"
+@page "/LihatJadwal/{bulanint:int?}"
 @using SP2CJ.Services
 
 
 
 <div class="container block">
     <div class="block columns">
-        <Select TValue="String" Class="select is-flex is-full is-vcentered" SelectedValue="selectedBulan" SelectedValueChanged="@OnSelectedValueChanged">
-            @foreach (var item in ListBulan)
-            {
-                <SelectItem Value="@item">@item</SelectItem>
-            }
-        </Select>
+        <div class="column control">
+            <Select TValue="String" Class="select is-flex is-full is-vcentered" SelectedValue="selectedBulan" SelectedValueChanged="@OnSelectedValueChanged">
+                @foreach (var item in ListBulan)
+                {
+                    <SelectItem Value="@item">@item</SelectItem>
+                }
+            </Select>
+            <Select TValue="String" Class="select is-flex is-full is-vcentered" SelectedValue="JenisJadwal" SelectedValueChanged="@OnSelectedValueChangedJenis">
+                @foreach (var item in jenisJadwals)
+                {
+                    <SelectItem Value="@item.itemName">@item.itemName</SelectItem>
+                }
+            </Select>
+        </div>
         @* <div class="column control">
         <label class=" is-justify-content-space-between">
         Tanggal awal:
@@ -84,6 +92,7 @@
 </div>
 
 @code {
+
     List<Jadwal> lihaJadwals = new List<Jadwal>();
     DateTime Range1;
     DateTime Range2;
@@ -91,16 +100,29 @@
     Dictionary<string, int> maxDict = new();
     List<string> ListBulan;
     string selectedBulan;
-    List<RefRole> listRefRole;
+    List<RefRole> listRefRole = new();
+    FSMerged fs = new();
+    [Parameter]
+    public int Bulanint { get; set; } = 1;
+    [Parameter]
+    public string JenisJadwal { get; set; } = "All";
+
+    List<RefMasterItem> jenisJadwals = new List<RefMasterItem>();
 
     protected override void OnInitialized()
     {
-        lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
         Range1 = DateTime.Now;
         Range2 = DateTime.Now.AddDays(14);
         maxDict = getMax(lihaJadwals);
         ListBulan = cm.MonthList;
         listRefRole = cm.GetRefRoles();
+        jenisJadwals.Add(RefMasterItem.AllRefMaster);
+        jenisJadwals = jenisJadwals.Concat(fs.GetRefMasterItems("IBDH").ItemList).ToList();
+        JenisJadwal = "All";
+        Bulanint = DateTime.Now.Month;
+        selectedBulan = ListBulan[Bulanint];
+        lihaJadwals = cm.GetJadwalsByBulan(selectedBulan, JenisJadwal).OrderBy(a => a.tanggal).ToList();
+        maxDict = getMax(lihaJadwals);
     }
 
     //void Datechangedevent(DateTime date)
@@ -119,21 +141,32 @@
     Dictionary<string, int> getMax(List<Jadwal> jadwal)
     {
         Dictionary<string, int> returned = new();
-        foreach (string key in jadwal.SelectMany(a => a.PelayansJadwal.Keys))
+
+        foreach (string key in listRefRole.Where(luar => jadwal.SelectMany(a => a.PelayansJadwal.Keys).Any(x => x == luar.RoleCode)).Select(luarr => luarr.RoleCode))
         {
             returned[key] = jadwal.Select(a => a.PelayansJadwal[key].Count).Max();
         }
+
+
         return returned;
     }
     Task OnSelectedValueChanged(string value)
     {
         selectedBulan = value;
 
-        lihaJadwals = cm.GetJadwalsByBulan(selectedBulan).OrderBy(a => a.tanggal).ToList();
+        lihaJadwals = cm.GetJadwalsByBulan(selectedBulan, JenisJadwal).OrderBy(a => a.tanggal).ToList();
         maxDict = getMax(lihaJadwals);
 
         return Task.CompletedTask;
     }
+    Task OnSelectedValueChangedJenis(string value)
+    {
+        JenisJadwal = value;
 
+        lihaJadwals = cm.GetJadwalsByBulan(selectedBulan, JenisJadwal).OrderBy(a => a.tanggal).ToList();
+        maxDict = getMax(lihaJadwals);
+
+        return Task.CompletedTask;
+    }
 
 }

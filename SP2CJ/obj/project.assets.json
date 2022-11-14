@@ -3700,7 +3700,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Valerie\\.nuget\\packages\\": {}
+    "C:\\Users\\Valerie\\.nuget\\packages\\": {},
+    "C:\\Users\\Valerie\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -3711,8 +3712,12 @@
       "packagesPath": "C:\\Users\\Valerie\\.nuget\\packages\\",
       "outputPath": "D:\\webGereja\\SP2CJWEB\\SP2CJ.web\\SP2CJ\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Users\\Valerie\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\Valerie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Valerie\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

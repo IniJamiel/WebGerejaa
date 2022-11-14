@@ -83,8 +83,8 @@
 
     protected override void OnAfterRender(bool firstRender)
     {
-        string redirect = "/LihatJadwal/" + DateTime.Now.Month.ToString();
-        NavManager.NavigateTo("LihatJadwal");
+        string redirect = "/LihatJadwalCard/" + DateTime.Now.Month.ToString();
+        NavManager.NavigateTo("LihatJadwalCard");
         base.OnAfterRender(firstRender);
     }
 

@@ -1,8 +1,6 @@
 @page "/LihatJadwal/{bulanint:int?}"
 @using SP2CJ.Services
 
-
-
 <div class="container block">
     <div class="block columns">
         <div class="column control">
@@ -21,20 +19,6 @@
                 }
             </Select>
         </div>
-        @* <div class="column control">
-        <label class=" is-justify-content-space-between">
-        Tanggal awal:
-        </label>
-        <DatePicker TValue="DateTime" DateChanged="@Datechangedevent" Date="@Range1">
-        </DatePicker>
-        </div>
-        <div class="column control">
-        <label class=" is-justify-content-space-between">
-        Tanggal akhir:
-        </label>
-        <DatePicker TValue="DateTime" DateChanged="@Datechangedevent2" Date="@Range2">
-        </DatePicker>
-        </div>*@
     </div>
     <div class="block table-container">
         <table class="table is-striped is-narrow is-hoverable is-fullwidth">
@@ -126,19 +110,7 @@
         lihaJadwals = cm.GetJadwalsByBulan(selectedBulan, JenisJadwal).OrderBy(a => a.tanggal).ToList();
         maxDict = getMax(lihaJadwals);
     }
-
-    //void Datechangedevent(DateTime date)
-    //{
-    //    Range1 = date;
-    //    lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
-    //    maxDict = getMax(lihaJadwals);
-    //}
-    //void Datechangedevent2(DateTime date)
-    //{
-    //    Range2 = date;
-    //    lihaJadwals = cm.GetJadwals(Range1, Range2).OrderBy(a => a.tanggal).ToList();
-    //    maxDict = getMax(lihaJadwals);
-    //}
+    
 
     Dictionary<string, int> getMax(List<Jadwal> jadwal)
     {

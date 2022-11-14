@@ -1,0 +1,78 @@
+﻿@page "/LihatJadwalCard/{bulanint:int?}"
+@using SP2CJ.Services
+
+        <h1>Jadwal!!!</h1>
+<div class="tile is-ancestor">
+    
+    <div class="tile is-parent" style="flex-wrap: wrap;">
+        
+        @foreach (var jadwal in lihaJadwals)
+        {
+            <div class="tile is-child box">
+                <p class="title">@jadwal.tanggal.ToLongDateString()</p>
+                <p class="subtitle">@jadwal.Tema</p>
+                <div class="content">
+                    <ul>
+                        @foreach (var group in jadwal.Pelayans.GroupBy(a => a.RoleCode))
+                        {
+                            <li>
+                                <strong>@listRefRole.FirstOrDefault(a => a.RoleCode == group.Key)!.RoleName : </strong>@string.Join(", ", group.Select(a => a.Jemaat.FullName))
+                            </li>
+                        }
+                    </ul> 
+                </div>
+            </div>
+        }
+    </div>
+    
+    
+</div>
+
+
+
+
+
+@code {
+    List<Jadwal> lihaJadwals = new List<Jadwal>();
+    CrudMongo cm = new CrudMongo();
+    Dictionary<string, int> maxDict = new();
+    List<string> ListBulan;
+    string selectedBulan;
+    List<RefRole> listRefRole = new();
+    FSMerged fs = new();
+    [Parameter]
+    public int Bulanint { get; set; } = 1;
+    [Parameter]
+    public string JenisJadwal { get; set; } = "All";
+
+    List<RefMasterItem> jenisJadwals = new List<RefMasterItem>();
+
+    protected override void OnInitialized()
+    {
+        ListBulan = cm.MonthList;
+        listRefRole = cm.GetRefRoles();
+        jenisJadwals.Add(RefMasterItem.AllRefMaster);
+        jenisJadwals = jenisJadwals.Concat(fs.GetRefMasterItems("IBDH").ItemList).ToList();
+        JenisJadwal = "All";
+        Bulanint = DateTime.Now.Month-1;
+        selectedBulan = ListBulan[Bulanint];
+        lihaJadwals = cm.GetJadwalsByBulan(selectedBulan, JenisJadwal).OrderBy(a => a.tanggal).ToList();
+    }
+
+    Task OnSelectedValueChanged(string value)
+    {
+        selectedBulan = value;
+
+        lihaJadwals = cm.GetJadwalsByBulan(selectedBulan, JenisJadwal).OrderBy(a => a.tanggal).ToList();
+        return Task.CompletedTask;
+    }
+
+
+    Task OnSelectedValueChangedJenis(string value)
+    {
+        JenisJadwal = value;
+
+        lihaJadwals = cm.GetJadwalsByBulan(selectedBulan, JenisJadwal).OrderBy(a => a.tanggal).ToList();
+        return Task.CompletedTask;
+    }
+}

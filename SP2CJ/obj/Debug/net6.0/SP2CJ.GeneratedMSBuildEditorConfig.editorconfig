@@ -51,6 +51,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGloYXRKYWR3YWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/LihatJadwalCard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGloYXRKYWR3YWxDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/webGereja/SP2CJWEB/SP2CJ.web/SP2CJ/Pages/LihatSemuaJemaat.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGloYXRTZW11YUplbWFhdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
